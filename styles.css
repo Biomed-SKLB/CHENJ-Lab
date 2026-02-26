@@ -10,7 +10,7 @@ body {
 /* Hero image for homepage */
 header {
     position: relative;
-    height: 80vh;
+    height: 90vh;
     background-color: #333;
 }
 
@@ -21,7 +21,7 @@ header {
     height: 100%;
     text-align: center;
     color: white;
-    padding: 100px 20px;
+    padding: 120px 20px;
 }
 
 header h1 {
@@ -82,7 +82,7 @@ section p {
 
 footer {
     text-align: center;
-    padding: 0px;
+    padding: 3px;
     background-color: #333;
     color: white;
 }
