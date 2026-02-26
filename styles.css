@@ -15,7 +15,7 @@ header {
 }
 
 .hero-image {
-    background-image: url('your-image-url-here.png'); /* Change this to your background image */
+    background-image: url('your-image-url-here.png'); /* Replace with your background image */
     background-size: cover;
     background-position: center;
     height: 100%;
@@ -33,11 +33,14 @@ header p {
     font-size: 1.5rem;
 }
 
-/* Navigation Bar - Horizontal */
+/* Navigation Bar - Horizontal, right at the top */
 .navbar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
     background-color: #333;
     padding: 10px;
-    text-align: right;
+    border-radius: 8px;
 }
 
 .navbar ul {
@@ -77,10 +80,14 @@ section p {
     font-size: 1rem;
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 10px;
     background-color: #333;
     color: white;
+}
+
+/* File input styles */
+input[type="file"] {
+    margin-top: 10px;
 }
