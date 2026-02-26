@@ -8,22 +8,16 @@ body {
 }
 
 /* Hero image for homepage */
-header {
-    position: relative;
-    height: 40vh;
-    background-color: #333;
-}
-
 .hero-image {
-    background-image: url('cjlogo_20260226201956_250_76.png'); /* Replace with your background image */
-    background-size: cover;
-    background-position: center;
-    height: 40vh;
-    text-align: center;
+    background-image: url('cjlogo_202602226201956_250_76.png'); 
+    background-size: cover;  
+    background-position: center;  
+    height: 80vh;  
     color: white;
-    padding: 100px 20px;
+    padding: 120px 20px; 
 }
 
+/* Header content (Title and subtitle) */
 header h1 {
     font-size: 3rem;
     margin: 0;
@@ -64,28 +58,13 @@ header p {
     text-decoration: underline;
 }
 
-/* Sections (for secondary pages) */
-section {
-    margin: 30px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-}
-
-section h2 {
-    font-size: 2rem;
-}
-
-section p {
-    font-size: 1rem;
-}
-
+/* Footer */
 footer {
     text-align: center;
     padding: 10px;
     background-color: #333;
     color: white;
-    margin-top: 20px;
+    margin-top: 20px; 
 }
 
 /* File input styles */
