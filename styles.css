@@ -10,7 +10,7 @@ body {
 /* Hero image for homepage */
 header {
     position: relative;
-    height: 100vh;
+    height: 95vh;
     background-color: #333;
 }
 
@@ -18,7 +18,7 @@ header {
     background-image: url('cjlogo_20260226201956_250_76.png'); /* Replace with your background image */
     background-size: cover;
     background-position: center;
-    height: 80%;
+    height: 100%;
     text-align: center;
     color: white;
     padding: 120px 20px;
@@ -82,7 +82,7 @@ section p {
 
 footer {
     text-align: center;
-    padding: 3px;
+    padding: 10px;
     background-color: #333;
     color: white;
 }
