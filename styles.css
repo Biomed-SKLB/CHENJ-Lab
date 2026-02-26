@@ -15,7 +15,7 @@ header {
 }
 
 .hero-image {
-    background-image: url('https://github.com/Biomed-SKLB/CHENJ-Lab/blob/main/cjlogo_20260226201956_250_76.png'); /* Replace with your background image */
+    background-image: url('cjlogo_20260226201956_250_76.png'); /* Replace with your background image */
     background-size: cover;
     background-position: center;
     height: 100%;
