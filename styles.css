@@ -7,9 +7,10 @@ body {
     color: #333;
 }
 
+/* Hero image for homepage */
 header {
     position: relative;
-    height: 400px;
+    height: 100vh;
     background-color: #333;
 }
 
@@ -20,7 +21,7 @@ header {
     height: 100%;
     text-align: center;
     color: white;
-    padding: 100px 20px;
+    padding: 200px 20px;
 }
 
 header h1 {
@@ -32,35 +33,35 @@ header p {
     font-size: 1.5rem;
 }
 
-/* Navigation Bar */
-nav {
+/* Navigation Bar - Horizontal */
+.navbar {
     background-color: #333;
     padding: 10px;
-    text-align: center;
+    text-align: right;
 }
 
-nav ul {
+.navbar ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-nav ul li {
+.navbar ul li {
     display: inline;
     margin: 0 15px;
 }
 
-nav ul li a {
+.navbar ul li a {
     color: white;
     text-decoration: none;
     font-size: 1.2rem;
 }
 
-nav ul li a:hover {
+.navbar ul li a:hover {
     text-decoration: underline;
 }
 
-/* Sections */
+/* Sections (for secondary pages) */
 section {
     margin: 30px;
     padding: 20px;
@@ -76,6 +77,7 @@ section p {
     font-size: 1rem;
 }
 
+/* Footer */
 footer {
     text-align: center;
     padding: 10px;
