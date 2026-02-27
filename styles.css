@@ -14,7 +14,8 @@ body {
     background-position: center;  
     height: 90vh;  
     color: white;
-    padding: 120px 20px; 
+    padding: 120px 20px;
+    text-align: center;
 }
 
 /* Header content (Title and subtitle) */
