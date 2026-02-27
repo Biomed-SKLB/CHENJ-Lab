@@ -137,3 +137,48 @@ input[type="file"] {
     margin-top: 10px;
     text-align: justify;
 }
+
+/* Publications page styles */
+.publications {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.publications h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.publication {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.publication h2 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.publication h2 a {
+    text-decoration: none;
+    color: #03045E;
+}
+
+.publication h2 a:hover {
+    text-decoration: underline;
+}
+
+.publication p {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.publication p strong {
+    font-weight: bold;
+}
