@@ -35,7 +35,7 @@ header p {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #03045E;
     padding: 10px;
     border-radius: 8px;
 }
