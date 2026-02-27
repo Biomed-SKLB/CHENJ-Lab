@@ -83,7 +83,7 @@ input[type="file"] {
     background-color: #f9f9f9;
     border-radius: 8px;
     width: 100%; /* Make the card fill the width */
-    max-width: 1200px; /* Set max width for large screens */
+    max-width: 1500px; /* Set max width for large screens */
     display: flex; /* Use flexbox for horizontal layout */
     flex-direction: row; /* Align items in a row */
     align-items: center; /* Vertically center the content */
@@ -106,8 +106,8 @@ input[type="file"] {
 }
 
 .team-member img {
-    width: 200px;  /* Increase the size of the image */
-    height: 200px;
+    width: 250px;  /* Increase the size of the image */
+    height: 350px;
     object-fit: cover;
     border-radius: 8px;
 }
