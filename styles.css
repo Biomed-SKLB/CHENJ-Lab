@@ -78,24 +78,19 @@ input[type="file"] {
     margin-top: 10px;
 }
 
-/* General layout for members page */
-.team-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    padding: 20px;
-}
-
+/* Update team member card layout */
 .team-member {
     background-color: #f9f9f9;
     border-radius: 8px;
-    width: 70%;
-    display: flex;
-    flex-direction: row;  /* Change to horizontal layout */
+    width: 100%; /* Make the card fill the width */
+    max-width: 1200px; /* Set max width for large screens */
+    display: flex; /* Use flexbox for horizontal layout */
+    flex-direction: row; /* Align items in a row */
+    align-items: center; /* Vertically center the content */
     padding: 20px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    margin: 20px auto; /* Center the card horizontally */
 }
 
 .team-member:hover {
@@ -105,13 +100,14 @@ input[type="file"] {
 .member-info {
     display: flex;
     flex-direction: row;
+    align-items: center; /* Make sure image and text are vertically aligned */
     gap: 20px;
     width: 100%;
 }
 
 .team-member img {
-    width: 150px; /* Adjust size as needed */
-    height: 150px;
+    width: 200px;  /* Increase the size of the image */
+    height: 200px;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -121,22 +117,22 @@ input[type="file"] {
 }
 
 .team-member h3 {
-    font-size: 1.5rem;
+    font-size: 2rem; /* Increase the font size for the name */
     margin: 10px 0;
 }
 
 .team-member .position {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #333;
 }
 
 .team-member .research {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #555;
 }
 
 .team-member .bio {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #777;
     margin-top: 10px;
     text-align: justify;
