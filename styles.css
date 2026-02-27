@@ -78,11 +78,11 @@ input[type="file"] {
     margin-top: 10px;
 }
 
-/* 为 members 页面添加的样式 */
+/* General layout for members page */
 .team-container {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     gap: 30px;
     padding: 20px;
 }
@@ -90,22 +90,34 @@ input[type="file"] {
 .team-member {
     background-color: #f9f9f9;
     border-radius: 8px;
-    width: 250px;
-    text-align: center;
+    width: 70%;
+    display: flex;
+    flex-direction: row;  /* Change to horizontal layout */
     padding: 20px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
 .team-member:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px);  /* Hover effect to lift the card */
+}
+
+.member-info {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
 }
 
 .team-member img {
-    width: 100%;
-    height: 200px;
+    width: 150px; /* Adjust size as needed */
+    height: 150px;
     object-fit: cover;
     border-radius: 8px;
+}
+
+.member-text {
+    flex: 1;
 }
 
 .team-member h3 {
