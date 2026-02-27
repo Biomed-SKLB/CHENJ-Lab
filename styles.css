@@ -78,6 +78,15 @@ input[type="file"] {
     margin-top: 10px;
 }
 
+/* Background image for the members page */
+.members-page {
+    background-image: url('实验室合照.jpg'); /* 设置你的图片路径 */
+    background-size: cover;  /* 让图片完全覆盖背景 */
+    background-position: center;  /* 居中显示图片 */
+    background-repeat: no-repeat;  /* 防止图片重复 */
+    min-height: 100vh;  /* 页面最小高度为屏幕高度 */
+}
+
 /* Update team member card layout */
 .team-member {
     background-color: #f9f9f9;
