@@ -157,7 +157,8 @@ input[type="file"] {
     padding: 20px;
     margin-bottom: 30px;
     max-width: 1200px;
-    margin: 5 auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .publication h2 {
