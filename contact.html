@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - CHENJ-Lab</title>
+    <title>Contact - CHENJ-Lab</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <ul>
@@ -24,19 +25,41 @@
         </ul>
     </nav>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>If you have any questions or would like to get in touch, please feel free to reach out.</p>
+    <!-- Hero Image Section -->
+    <header class="hero-image">
+        <h1>Contact Us</h1>
+        <p>We are here to connect with you!</p>
+    </header>
 
-        <h3>Upload an Image Here:</h3>
-        <input type="file" id="uploadImage" name="uploadImage">
-        <p><i>Upload an image for the contact section.</i></p>
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2>Get in Touch</h2>
+        
+        <!-- Email Section -->
+        <div class="email">
+            <p><strong>Email:</strong> <span id="email-link" style="color: #03045E; cursor: pointer;">Click to Reveal</span></p>
+            <p id="actual-email" style="display: none;">chenjlab@163.com</p>
+        </div>
+
+        <!-- Lab Location Section -->
+        <div class="location">
+            <p><strong>Lab Location:</strong></p>
+            <p>Tianfu Life Science Park, No. 88 South Keyuan Road, Chengdu High-tech Zone, Chengdu, Sichuan, China 610041, R&D Building B2, B808.</p>
+        </div>
     </section>
 
     <!-- Footer Section -->
     <footer>
         <p>&copy; 2026 CHENJ-Lab</p>
     </footer>
+
+    <script>
+        // JavaScript to reveal email
+        document.getElementById("email-link").addEventListener("click", function() {
+            document.getElementById("actual-email").style.display = "block";
+            document.getElementById("email-link").style.display = "none";
+        });
+    </script>
+
 </body>
 </html>
