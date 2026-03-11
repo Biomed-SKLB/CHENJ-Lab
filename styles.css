@@ -312,3 +312,49 @@ input[type="file"] {
 .chen-name {
     font-weight: bold;
 }
+
+.recruitment {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px 30px 50px;
+    line-height: 1.8;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.recruitment h1 {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+}
+
+.recruitment h2 {
+    margin-top: 35px;
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+    color: #222;
+}
+
+.recruitment h3 {
+    margin-bottom: 8px;
+    font-size: 1.15rem;
+}
+
+.recruitment p {
+    margin-bottom: 16px;
+}
+
+.recruitment ul {
+    margin: 0 0 18px 20px;
+    padding: 0;
+}
+
+.recruitment li {
+    margin-bottom: 8px;
+}
+
+.recruitment-item {
+    margin-bottom: 22px;
+    padding: 16px 20px;
+    background: #f7f7f7;
+    border-radius: 12px;
+}
