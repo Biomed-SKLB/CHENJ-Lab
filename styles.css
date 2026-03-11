@@ -138,6 +138,131 @@ input[type="file"] {
     text-align: justify;
 }
 
+#jing-chen-member {
+    max-width: 1500px;
+    margin: 40px auto;
+    padding: 30px 36px;
+    background: #f5f5f5;
+    border-radius: 18px;
+    box-sizing: border-box;
+}
+
+#jing-chen-member .member-info {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+}
+
+#jing-chen-member .member-info img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+#jing-chen-member .member-text {
+    max-width: 900px;
+}
+
+#jing-chen-member .member-text h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 2.2rem;
+}
+
+#jing-chen-member .position {
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+}
+
+#jing-chen-member .research {
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+#jing-chen-member .profile-links-intro {
+    margin: 10px 0 10px 0;
+    font-size: 1rem;
+    color: #444;
+}
+
+#jing-chen-member .profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+#jing-chen-member .profile-links a {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #e9eef6;
+    color: #1f3b63;
+    text-decoration: none;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#jing-chen-member .profile-links a:hover {
+    background: #dbe6f5;
+    transform: translateY(-1px);
+}
+
+#jing-chen-member .bio {
+    margin-top: 8px;
+}
+
+#jing-chen-member .bio-section-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 20px 0 12px 0;
+    color: #444;
+}
+
+#jing-chen-member .bio-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 18px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+#jing-chen-member .bio-date {
+    font-weight: 500;
+    color: #555;
+    white-space: nowrap;
+}
+
+#jing-chen-member .bio-detail {
+    color: #444;
+}
+
+@media (max-width: 900px) {
+    #jing-chen-member .member-info {
+        grid-template-columns: 1fr;
+    }
+
+    #jing-chen-member .member-info img {
+        max-width: 260px;
+    }
+
+    #jing-chen-member .member-text {
+        max-width: 100%;
+    }
+
+    #jing-chen-member .bio-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    #jing-chen-member .bio-date {
+        white-space: normal;
+    }
+}
+
 /* Publications page styles */
 .publications {
     padding: 20px;
