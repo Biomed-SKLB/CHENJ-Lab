@@ -1588,3 +1588,128 @@ body.intranet-page footer {
         background-attachment: scroll;
     }
 }
+
+/* Gallery page background */
+body.gallery-page {
+    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
+                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
+    background-color: #eaf2f8;
+    min-height: 100vh;
+}
+
+/* Main layout */
+.gallery-page-content {
+    max-width: 1380px;
+    width: calc(100% - 48px);
+    margin: 36px auto 60px;
+    padding: 90px 0 40px;
+    line-height: 1.8;
+    color: #333;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+/* Intro */
+.gallery-intro-block {
+    text-align: center;
+    margin: 0 0 34px 0;
+}
+
+.gallery-page-title {
+    margin: 0 0 12px 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.gallery-page-intro {
+    margin: 0 auto;
+    max-width: 980px;
+    font-size: 1.03rem;
+    line-height: 1.9;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* Section block */
+.gallery-section-block {
+    margin-bottom: 28px;
+    padding: 24px 26px;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* Card */
+.gallery-card {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 14px;
+}
+
+.gallery-image-wrapper {
+    margin-bottom: 14px;
+}
+
+.gallery-image-wrapper img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    background: #dfe7f0;
+}
+
+.gallery-card-title {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #222;
+    line-height: 1.5;
+}
+
+.gallery-card-text {
+    margin: 0;
+    color: #444;
+    line-height: 1.7;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .gallery-page-content {
+        width: calc(100% - 24px);
+        margin: 24px auto 40px;
+        padding-top: 76px;
+    }
+
+    .gallery-page-title {
+        font-size: 2rem;
+    }
+
+    .gallery-page-intro {
+        font-size: 0.98rem;
+        padding: 0 8px;
+    }
+
+    .gallery-section-block {
+        padding: 18px 18px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body.gallery-page {
+        background-attachment: scroll;
+    }
+}
