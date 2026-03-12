@@ -1458,3 +1458,17 @@ body.resources-page {
         background-attachment: scroll;
     }
 }
+
+body.resources-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.resources-page-content {
+    flex: 1;
+}
+
+body.resources-page footer {
+    margin-top: auto;
+}
