@@ -1472,3 +1472,119 @@ body.resources-page {
 body.resources-page footer {
     margin-top: auto;
 }
+
+/* Intranet page background */
+body.intranet-page {
+    background: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)),
+                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
+    background-color: #eaf2f8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main layout */
+.intranet-page-content {
+    max-width: 1100px;
+    width: calc(100% - 48px);
+    margin: 36px auto 60px;
+    padding: 90px 0 60px;
+    line-height: 1.8;
+    color: #333;
+    box-sizing: border-box;
+    background: transparent;
+    flex: 1;
+}
+
+/* Intro */
+.intranet-intro-block {
+    text-align: center;
+    margin: 0 0 32px 0;
+}
+
+.intranet-page-title {
+    margin: 0 0 12px 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.intranet-page-intro {
+    margin: 0 auto;
+    max-width: 760px;
+    font-size: 1.02rem;
+    line-height: 1.9;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* No large outer panel */
+.intranet-section-block {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+/* Single centered placeholder card */
+.intranet-placeholder-card {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 56px 32px;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.intranet-placeholder-title {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #222;
+}
+
+.intranet-placeholder-text {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Keep footer at bottom */
+body.intranet-page footer {
+    margin-top: auto;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .intranet-page-content {
+        width: calc(100% - 24px);
+        margin: 24px auto 40px;
+        padding-top: 76px;
+    }
+
+    .intranet-page-title {
+        font-size: 2rem;
+    }
+
+    .intranet-page-intro {
+        font-size: 0.98rem;
+        padding: 0 8px;
+    }
+
+    .intranet-placeholder-card {
+        padding: 44px 20px;
+    }
+
+    .intranet-placeholder-title {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body.intranet-page {
+        background-attachment: scroll;
+    }
+}
