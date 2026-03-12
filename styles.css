@@ -1,23 +1,32 @@
 :root {
+    --bg-default: #f4f4f4;
     --bg-page: #eaf2f8;
-    --bg-body: #f4f4f4;
+    --bg-home: #7f97b9;
+
     --nav-bg: #8ECAE6;
     --footer-bg: #333333;
+
     --text-main: #333333;
     --text-muted: #444444;
     --text-soft: #555555;
     --text-light: #ffffff;
+
     --accent: #1f5f8b;
     --accent-dark: #1f3b63;
+
     --card-bg: rgba(255, 255, 255, 0.82);
     --card-bg-soft: rgba(255, 255, 255, 0.72);
     --card-bg-strong: rgba(255, 255, 255, 0.86);
-    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.04);
+
     --radius-lg: 16px;
     --radius-md: 14px;
     --radius-sm: 12px;
+
+    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.04);
+
     --page-width-wide: 1380px;
     --page-width-mid: 1100px;
+
     --nav-offset: 90px;
 }
 
@@ -32,7 +41,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--bg-body);
+    background-color: var(--bg-default);
     color: var(--text-main);
 }
 
@@ -102,7 +111,6 @@ footer {
 /* =========================
    Shared page backgrounds
 ========================= */
-body.home-page,
 body.members-page,
 body.publications-page,
 body.recruitment-page,
@@ -120,17 +128,18 @@ body.gallery-page {
     min-height: 100vh;
 }
 
-/* sticky footer pages */
+/* sticky-footer pages */
 body.home-page,
 body.resources-page,
 body.intranet-page {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-body.home-page footer,
 body.resources-page footer,
-body.intranet-page footer {
+body.intranet-page footer,
+body.home-page footer {
     margin-top: auto;
 }
 
@@ -151,7 +160,6 @@ body.members-page .team-container {
     padding: var(--nav-offset) 0 40px;
     line-height: 1.8;
     color: var(--text-main);
-    box-sizing: border-box;
     background: transparent;
 }
 
@@ -162,13 +170,18 @@ body.members-page .team-container {
     width: calc(100% - 48px);
     margin: 36px auto 60px;
     padding: var(--nav-offset) 0 60px;
-    box-sizing: border-box;
     background: transparent;
 }
 
 /* =========================
    Home
 ========================= */
+body.home-page {
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10));
+    background-color: var(--bg-home);
+}
+
 .home-page-content {
     flex: 1;
     display: flex;
@@ -197,20 +210,20 @@ body.members-page .team-container {
 }
 
 .home-logo-card {
-    max-width: 360px;
+    max-width: 520px;
     margin: 0 auto;
-    padding: 20px 20px;
-    background: rgba(255, 255, 255, 0.10);
-    border-radius: 18px;
-    box-shadow: var(--shadow-soft);
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
     text-align: center;
 }
 
 .home-logo-card img {
     width: 100%;
-    max-width: 260px;
+    max-width: 440px;
     margin: 0 auto;
-    border-radius: 0;
+    border-radius: 22px;
 }
 
 /* =========================
@@ -261,6 +274,7 @@ body.members-page .member-info img {
     width: 100%;
     max-width: 300px;
     border-radius: 14px;
+    object-fit: cover;
 }
 
 body.members-page .member-text {
@@ -301,7 +315,7 @@ body.members-page .bio p {
 }
 
 #jing-chen-member .profile-links-intro {
-    margin: 10px 0 10px 0;
+    margin: 10px 0;
     font-size: 1rem;
     color: var(--text-muted);
 }
@@ -546,7 +560,7 @@ body.members-page .bio p {
 }
 
 /* =========================
-   Shared page intro blocks
+   Shared intro blocks
 ========================= */
 .research-intro-block,
 .honors-intro-block,
@@ -1066,8 +1080,8 @@ body.members-page .bio p {
         font-size: 1.7rem;
     }
 
-    .home-logo-card {
-        padding: 20px 16px;
+    .home-logo-card img {
+        max-width: 320px;
     }
 
     .home-page-intro {
@@ -1076,7 +1090,6 @@ body.members-page .bio p {
 }
 
 @media (max-width: 768px) {
-    body.home-page,
     body.members-page,
     body.publications-page,
     body.recruitment-page,
