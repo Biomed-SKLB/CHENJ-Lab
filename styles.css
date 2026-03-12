@@ -1,327 +1,309 @@
-/* Navigation Bar - Horizontal, right at the top */
+:root {
+    --bg-page: #eaf2f8;
+    --bg-body: #f4f4f4;
+    --nav-bg: #8ECAE6;
+    --footer-bg: #333333;
+    --text-main: #333333;
+    --text-muted: #444444;
+    --text-soft: #555555;
+    --text-light: #ffffff;
+    --accent: #1f5f8b;
+    --accent-dark: #1f3b63;
+    --card-bg: rgba(255, 255, 255, 0.82);
+    --card-bg-soft: rgba(255, 255, 255, 0.72);
+    --card-bg-strong: rgba(255, 255, 255, 0.86);
+    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.04);
+    --radius-lg: 16px;
+    --radius-md: 14px;
+    --radius-sm: 12px;
+    --page-width-wide: 1380px;
+    --page-width-mid: 1100px;
+    --nav-offset: 90px;
+}
+
+/* =========================
+   Base
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+input[type="file"] {
+    margin-top: 10px;
+}
+
+/* =========================
+   Navbar
+========================= */
 .navbar {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     width: 100%;
-    background-color: #8ECAE6;
-    padding: 10px;
-    border-radius: 0;
-    z-index: 9999; 
-    text-align: right;
+    background-color: var(--nav-bg);
+    padding: 10px 18px;
+    z-index: 2000;
 }
 
 .navbar ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
 }
 
 .navbar ul li {
-    display: inline;
-    margin: 0 15px;
+    margin: 0;
 }
 
 .navbar ul li a {
-    color: white;
+    color: var(--text-light);
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 .navbar ul li a:hover {
     text-decoration: underline;
 }
 
-/* Footer */
+/* =========================
+   Footer
+========================= */
 footer {
     text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    margin-top: 20px; 
+    padding: 18px 12px;
+    background-color: var(--footer-bg);
+    color: var(--text-light);
+    margin-top: 20px;
 }
 
-/* File input styles */
-input[type="file"] {
-    margin-top: 10px;
-}
-
-/* Update team member card layout */
-.team-member {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    width: 100%; /* Make the card fill the width */
-    max-width: 1500px; /* Set max width for large screens */
-    display: flex; /* Use flexbox for horizontal layout */
-    flex-direction: row; /* Align items in a row */
-    align-items: center; /* Vertically center the content */
-    padding: 20px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    margin: 20px auto; /* Center the card horizontally */
-}
-
-.team-member:hover {
-    transform: translateY(-10px);  /* Hover effect to lift the card */
-}
-
-.member-info {
-    display: flex;
-    flex-direction: row;
-    align-items: center; /* Make sure image and text are vertically aligned */
-    gap: 20px;
-    width: 100%;
-}
-
-.team-member img {
-    width: 250px;  /* Increase the size of the image */
-    height: 350px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.member-text {
-    flex: 1;
-}
-
-.team-member h3 {
-    font-size: 2rem; /* Increase the font size for the name */
-    margin: 10px 0;
-}
-
-.team-member .position {
-    font-size: 1.2rem;
-    color: #333;
-}
-
-.team-member .research {
-    font-size: 1.2rem;
-    color: #555;
-}
-
-.team-member .bio {
-    font-size: 1.1rem;
-    color: #777;
-    margin-top: 10px;
-    text-align: justify;
-}
-
-#jing-chen-member {
-    max-width: 1500px;
-    margin: 40px auto;
-    padding: 30px 36px;
-    background: #f5f5f5;
-    border-radius: 18px;
-    box-sizing: border-box;
-}
-
-#jing-chen-member .member-info {
-    display: grid;
-    grid-template-columns: 300px minmax(0, 1fr);
-    gap: 28px;
-    align-items: start;
-}
-
-#jing-chen-member .member-info img {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 12px;
-    object-fit: cover;
-}
-
-#jing-chen-member .member-text {
-    max-width: 1200px;
-}
-
-#jing-chen-member .member-text h3 {
-    margin-top: 0;
-    margin-bottom: 12px;
-    font-size: 2.2rem;
-}
-
-#jing-chen-member .position {
-    font-size: 1.1rem;
-    margin-bottom: 18px;
-}
-
-#jing-chen-member .research {
-    line-height: 1.7;
-    margin-bottom: 12px;
-}
-
-#jing-chen-member .profile-links-intro {
-    margin: 10px 0 10px 0;
-    font-size: 1rem;
-    color: #444;
-}
-
-#jing-chen-member .profile-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-#jing-chen-member .profile-links a {
-    display: inline-block;
-    padding: 8px 14px;
-    background: #e9eef6;
-    color: #1f3b63;
-    text-decoration: none;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
-}
-
-#jing-chen-member .profile-links a:hover {
-    background: #dbe6f5;
-    transform: translateY(-1px);
-}
-
-#jing-chen-member .bio {
-    margin-top: 8px;
-}
-
-#jing-chen-member .bio-section-title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    margin: 20px 0 12px 0;
-    color: #444;
-}
-
-#jing-chen-member .bio-item {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 18px;
-    margin-bottom: 16px;
-    line-height: 1.6;
-}
-
-#jing-chen-member .bio-date {
-    font-weight: 500;
-    color: #555;
-    white-space: nowrap;
-}
-
-#jing-chen-member .bio-detail {
-    color: #444;
-}
-
-@media (max-width: 900px) {
-    #jing-chen-member .member-info {
-        grid-template-columns: 1fr;
-    }
-
-    #jing-chen-member .member-info img {
-        max-width: 260px;
-    }
-
-    #jing-chen-member .member-text {
-        max-width: 100%;
-    }
-
-    #jing-chen-member .bio-item {
-        grid-template-columns: 1fr;
-        gap: 6px;
-    }
-
-    #jing-chen-member .bio-date {
-        white-space: normal;
-    }
-}
-
-/* Members page background */
-body.members-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
+/* =========================
+   Shared page backgrounds
+========================= */
+body.home-page,
+body.members-page,
+body.publications-page,
+body.recruitment-page,
+body.contact-page,
+body.research-page,
+body.honors-page,
+body.news-page,
+body.resources-page,
+body.intranet-page,
+body.gallery-page {
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)),
+        url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
+    background-color: var(--bg-page);
     min-height: 100vh;
 }
 
-/* Main members section */
-.members {
-    max-width: 1380px;
+/* sticky footer pages */
+body.home-page,
+body.resources-page,
+body.intranet-page {
+    display: flex;
+    flex-direction: column;
+}
+
+body.home-page footer,
+body.resources-page footer,
+body.intranet-page footer {
+    margin-top: auto;
+}
+
+/* =========================
+   Shared content widths
+========================= */
+.publications,
+.recruitment,
+.contact-layout,
+.research-page-content,
+.honors-page-content,
+.news-page-content,
+.gallery-page-content,
+body.members-page .team-container {
+    max-width: var(--page-width-wide);
     width: calc(100% - 48px);
     margin: 36px auto 60px;
-    padding: 20px 0 40px;
+    padding: var(--nav-offset) 0 40px;
     line-height: 1.8;
-    color: #333;
+    color: var(--text-main);
     box-sizing: border-box;
     background: transparent;
 }
 
-/* Page title */
-.members h1 {
-    font-size: 2.8rem;
-    margin-bottom: 24px;
-    color: #222;
+.resources-page-content,
+.intranet-page-content,
+.home-page-content {
+    max-width: var(--page-width-mid);
+    width: calc(100% - 48px);
+    margin: 36px auto 60px;
+    padding: var(--nav-offset) 0 60px;
+    box-sizing: border-box;
+    background: transparent;
 }
 
-/* Each member card */
-.team-member {
+/* =========================
+   Home
+========================= */
+.home-page-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home-intro-block {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.home-page-title {
+    margin: 0 0 10px 0;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.home-page-intro {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.home-logo-card {
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    background: rgba(255, 255, 255, 0.10);
+    border-radius: 18px;
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+}
+
+.home-logo-card img {
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto;
+    border-radius: 0;
+}
+
+/* =========================
+   Members
+========================= */
+body.members-page .team-container {
+    padding-top: var(--nav-offset);
+}
+
+.members-intro-block {
+    margin: 0 0 36px 0;
+    text-align: center;
+}
+
+.members-intro-title {
+    margin: 0 0 12px 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.members-intro-text {
+    margin: 0 auto;
+    max-width: 900px;
+    font-size: 1.02rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+body.members-page .team-member {
     margin-bottom: 24px;
     padding: 24px 26px;
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
 }
 
-/* Inner layout */
-.member-info {
+body.members-page .member-info {
     display: grid;
     grid-template-columns: 300px minmax(0, 1fr);
     gap: 28px;
     align-items: start;
 }
 
-.member-info img {
+body.members-page .member-info img {
     width: 100%;
     max-width: 300px;
     border-radius: 14px;
-    object-fit: cover;
 }
 
-.member-text {
+body.members-page .member-text {
     min-width: 0;
 }
 
-.member-text h3 {
+body.members-page .member-text h3 {
     margin: 0 0 10px 0;
     font-size: 2.2rem;
     color: #222;
 }
 
-.position {
+body.members-page .position {
     font-size: 1.1rem;
     margin-bottom: 14px;
-    color: #333;
+    color: var(--text-main);
 }
 
-.research {
+body.members-page .research {
     margin-bottom: 16px;
     line-height: 1.7;
+    color: var(--text-soft);
 }
 
-/* Common text blocks */
-.bio {
+body.members-page .bio {
     margin-top: 10px;
+    color: #777;
 }
 
-.bio p {
+body.members-page .bio p {
     margin: 0 0 14px 0;
     line-height: 1.65;
 }
 
-/* Special styling for Jing Chen section if present */
+/* Jing Chen special block */
 #jing-chen-member {
-    background: rgba(255, 255, 255, 0.86);
+    background: var(--card-bg-strong);
 }
 
 #jing-chen-member .profile-links-intro {
     margin: 10px 0 10px 0;
     font-size: 1rem;
-    color: #444;
+    color: var(--text-muted);
 }
 
 #jing-chen-member .profile-links {
@@ -335,7 +317,7 @@ body.members-page {
     display: inline-block;
     padding: 8px 14px;
     background: rgba(233, 238, 246, 0.95);
-    color: #1f3b63;
+    color: var(--accent-dark);
     text-decoration: none;
     border-radius: 999px;
     font-size: 0.95rem;
@@ -352,7 +334,7 @@ body.members-page {
     font-size: 1.05rem;
     font-weight: 700;
     margin: 20px 0 12px 0;
-    color: #444;
+    color: var(--text-muted);
 }
 
 #jing-chen-member .bio-item {
@@ -365,198 +347,40 @@ body.members-page {
 
 #jing-chen-member .bio-date {
     font-weight: 500;
-    color: #555;
+    color: var(--text-soft);
     white-space: nowrap;
 }
 
 #jing-chen-member .bio-detail {
-    color: #444;
+    color: var(--text-muted);
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-    .members {
-        width: calc(100% - 24px);
-        margin: 24px auto 40px;
-    }
-
-    .team-member {
-        padding: 18px 18px;
-    }
-
-    .member-info {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .member-info img {
-        max-width: 260px;
-    }
-
-    .members h1 {
-        font-size: 2.2rem;
-    }
-
-    .member-text h3 {
-        font-size: 1.8rem;
-    }
-
-    #jing-chen-member .bio-item {
-        grid-template-columns: 1fr;
-        gap: 6px;
-    }
-
-    #jing-chen-member .bio-date {
-        white-space: normal;
-    }
-}
-
-@media (max-width: 768px) {
-    body.members-page {
-        background-attachment: scroll;
-    }
-}
-
-/* Leave space for the fixed navbar on members page */
-body.members-page .team-container {
-    padding-top: 90px;
-}
-
-/* Intro block */
-.members-intro-block {
-    margin: 0 0 36px 0;
-    text-align: center;
-}
-
-.members-intro-title {
-    margin: 0 0 12px 0;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-.members-intro-text {
-    margin: 0 auto;
-    max-width: 900px;
-    font-size: 1.02rem;
-    line-height: 1.8;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-    body.members-page .team-container {
-        padding-top: 72px;
-    }
-
-    .members-intro-title {
-        font-size: 1.9rem;
-    }
-
-    .members-intro-text {
-        font-size: 0.96rem;
-        padding: 0 12px;
-    }
-}
-}
-/* Publications page styles */
-.publications {
-    padding: 20px;
-    background-color: #f4f4f4;
-}
-
-.publications h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-}
-
-.publication {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 30px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.publication h2 {
-    font-size: 1.6rem;
-    margin-bottom: 10px;
-}
-
-.publication h2 a {
-    text-decoration: none;
-    color: #03045E;
-}
-
-.publication h2 a:hover {
-    text-decoration: underline;
-}
-
-.publication p {
-    font-size: 1.1rem;
-    color: #333;
-}
-
-.publication p strong {
-    font-weight: bold;
-}
-
-.chen-name {
-    font-weight: bold;
-}
-
-/* Publications page background */
-body.publications-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
-    min-height: 100vh;
-}
-
-/* Publications main layout */
-.publications {
-    max-width: 1380px;
-    width: calc(100% - 48px);
-    margin: 36px auto 60px;
-    padding: 20px 0 40px;
-    line-height: 1.8;
-    color: #333;
-    box-sizing: border-box;
-    background: transparent;
-}
-
-/* Page title and note */
+/* =========================
+   Publications
+========================= */
 .publications h1 {
     font-size: 2.8rem;
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
     color: #222;
 }
 
 .publication-note {
     margin-bottom: 24px;
     padding: 16px 22px;
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-    color: #444;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    color: var(--text-muted);
 }
 
-/* Each publication card */
 .publication {
     margin-bottom: 24px;
     padding: 22px 24px;
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
 }
 
-/* Title */
 .publication-title {
     margin: 0 0 12px 0;
     font-size: 1.35rem;
@@ -572,7 +396,6 @@ body.publications-page {
     text-decoration: underline;
 }
 
-/* Text lines */
 .publication-authors,
 .publication-journal,
 .publication-doi {
@@ -580,9 +403,8 @@ body.publications-page {
     line-height: 1.7;
 }
 
-/* DOI link */
 .publication-doi a {
-    color: #1f5f8b;
+    color: var(--accent);
     text-decoration: none;
 }
 
@@ -590,7 +412,6 @@ body.publications-page {
     text-decoration: underline;
 }
 
-/* Author highlighting */
 .author {
     display: inline;
 }
@@ -600,67 +421,19 @@ body.publications-page {
 }
 
 .corresponding-author {
-    color: #1f5f8b;
+    color: var(--accent);
 }
 
 .chen-name {
     font-weight: 700;
 }
 
-/* Mobile adaptation */
-@media (max-width: 900px) {
-    .publications {
-        width: calc(100% - 24px);
-        margin: 24px auto 40px;
-    }
-
-    .publication,
-    .publication-note {
-        padding: 18px 18px;
-    }
-
-    .publications h1 {
-        font-size: 2.2rem;
-    }
-
-    .publication-title {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    body.publications-page {
-        background-attachment: scroll;
-    }
-}
-
-/* Recruitment page only */
-/* Recruitment page background */
-body.recruitment-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
-    min-height: 100vh;
-}
-
-/* Remove the huge white panel */
-.recruitment {
-    max-width: 1380px;
-    width: calc(100% - 48px);
-    margin: 36px auto 60px;
-    padding: 20px 0 40px;
-    line-height: 1.8;
-    color: #333;
-    box-sizing: border-box;
-    background: transparent;
-    border-radius: 0;
-    backdrop-filter: none;
-}
-
-/* Titles */
+/* =========================
+   Recruitment
+========================= */
 .recruitment h1 {
     font-size: 2.8rem;
-    margin-bottom: 22px;
+    margin: 0 0 22px 0;
     color: #222;
 }
 
@@ -677,28 +450,24 @@ body.recruitment-page {
     color: #222;
 }
 
-/* Make text into floating blocks */
 .recruitment > p,
 .recruitment-item,
 .recruitment ul {
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
 }
 
-/* Paragraph blocks */
 .recruitment > p {
     margin-bottom: 18px;
     padding: 20px 24px;
 }
 
-/* Position cards */
 .recruitment-item {
     margin-bottom: 24px;
     padding: 22px 24px;
 }
 
-/* List blocks */
 .recruitment ul {
     margin: 0 0 20px 0;
     padding: 18px 24px 18px 44px;
@@ -708,9 +477,8 @@ body.recruitment-page {
     margin-bottom: 8px;
 }
 
-/* Links */
 .recruitment a {
-    color: #1f5f8b;
+    color: var(--accent);
     text-decoration: none;
 }
 
@@ -718,78 +486,28 @@ body.recruitment-page {
     text-decoration: underline;
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-    .recruitment {
-        width: calc(100% - 24px);
-        margin: 24px auto 40px;
-    }
-
-    .recruitment > p,
-    .recruitment-item,
-    .recruitment ul {
-        padding: 18px 18px;
-    }
-
-    .recruitment ul {
-        padding-left: 36px;
-    }
-}
-
-@media (max-width: 768px) {
-    body.recruitment-page {
-        background-attachment: scroll;
-        background-size: 78vw auto;
-        background-position: center 180px;
-    }
-
-    .recruitment h1 {
-        font-size: 2.2rem;
-    }
-}
-
-/* Contact page background */
-body.contact-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
-    min-height: 100vh;
-}
-
-/* Contact layout */
-.contact-layout {
-    max-width: 1380px;
-    width: calc(100% - 48px);
-    margin: 36px auto 60px;
-    padding: 20px 0 40px;
-    line-height: 1.8;
-    color: #333;
-    box-sizing: border-box;
-    background: transparent;
-}
-
+/* =========================
+   Contact
+========================= */
 .contact-layout h1 {
     font-size: 2.8rem;
-    margin-bottom: 20px;
-    color: #222;
-}
-
-.contact-layout h2 {
-    margin: 0 0 12px 0;
-    font-size: 1.5rem;
-    color: #222;
+    margin: 0 0 20px 0;
+    color: var(--text-light);
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
 
 .contact-intro,
 .contact-card {
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
 }
 
 .contact-intro {
     margin-bottom: 24px;
     padding: 20px 24px;
+    text-align: center;
 }
 
 .contact-card {
@@ -797,12 +515,18 @@ body.contact-page {
     padding: 22px 24px;
 }
 
+.contact-card h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.5rem;
+    color: #222;
+}
+
 .contact-card p {
     margin: 8px 0;
 }
 
 .reveal-email {
-    color: #1f5f8b;
+    color: var(--accent);
     cursor: pointer;
     font-weight: 600;
 }
@@ -817,82 +541,62 @@ body.contact-page {
 }
 
 .hidden-email a {
-    color: #1f5f8b;
+    color: var(--accent);
     text-decoration: none;
 }
 
-@media (max-width: 900px) {
-    .contact-layout {
-        width: calc(100% - 24px);
-        margin: 24px auto 40px;
-    }
-
-    .contact-intro,
-    .contact-card {
-        padding: 18px 18px;
-    }
-}
-
-@media (max-width: 768px) {
-    body.contact-page {
-        background-attachment: scroll;
-    }
-
-    .contact-layout h1 {
-        font-size: 2.2rem;
-    }
-}
-
-/* Research page background */
-body.research-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
-    min-height: 100vh;
-}
-
-/* Main layout */
-.research-page-content {
-    max-width: 1380px;
-    width: calc(100% - 48px);
-    margin: 36px auto 60px;
-    padding: 90px 0 40px;
-    line-height: 1.8;
-    color: #333;
-    box-sizing: border-box;
-    background: transparent;
-}
-
-/* Intro */
-.research-intro-block {
+/* =========================
+   Shared page intro blocks
+========================= */
+.research-intro-block,
+.honors-intro-block,
+.news-intro-block,
+.gallery-intro-block,
+.resources-intro-block,
+.intranet-intro-block {
     text-align: center;
     margin: 0 0 34px 0;
 }
 
-.research-page-title {
+.research-page-title,
+.honors-page-title,
+.news-page-title,
+.gallery-page-title,
+.resources-page-title,
+.intranet-page-title {
     margin: 0 0 12px 0;
     font-size: 2.4rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-light);
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
 
-.research-page-intro {
+.research-page-intro,
+.honors-page-intro,
+.news-page-intro,
+.gallery-page-intro,
+.resources-page-intro,
+.intranet-page-intro {
     margin: 0 auto;
     max-width: 980px;
     font-size: 1.03rem;
     line-height: 1.9;
-    color: #ffffff;
+    color: var(--text-light);
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
 
-/* Section blocks */
-.research-section-block {
+/* =========================
+   Shared section blocks
+========================= */
+.research-section-block,
+.honors-section-block,
+.news-section-block,
+.gallery-section-block {
     margin-bottom: 28px;
     padding: 24px 26px;
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
 }
 
 .section-title {
@@ -901,7 +605,9 @@ body.research-page {
     color: #222;
 }
 
-/* Research image area */
+/* =========================
+   Research
+========================= */
 .research-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -909,8 +615,8 @@ body.research-page {
 }
 
 .research-image-card {
-    background: rgba(255, 255, 255, 0.72);
-    border-radius: 14px;
+    background: var(--card-bg-soft);
+    border-radius: var(--radius-md);
     padding: 18px;
 }
 
@@ -924,68 +630,8 @@ body.research-page {
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: 12px;
-    display: block;
+    border-radius: var(--radius-sm);
     background: #dfe7f0;
-}
-
-/* Funding area */
-.funding-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-}
-
-.funding-card {
-    padding: 18px 20px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.72);
-}
-
-.funding-title {
-    margin: 0 0 8px 0;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #222;
-}
-
-.funding-text {
-    margin: 0;
-    color: #444;
-    line-height: 1.7;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-    .research-page-content {
-        width: calc(100% - 24px);
-        margin: 24px auto 40px;
-        padding-top: 76px;
-    }
-
-    .research-page-title {
-        font-size: 2rem;
-    }
-
-    .research-page-intro {
-        font-size: 0.98rem;
-        padding: 0 8px;
-    }
-
-    .research-section-block {
-        padding: 18px 18px;
-    }
-
-    .research-grid,
-    .funding-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    body.research-page {
-        background-attachment: scroll;
-    }
 }
 
 .funding-subsection-title {
@@ -999,59 +645,34 @@ body.research-page {
     margin-top: 28px;
 }
 
-/* Honors page background */
-body.honors-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
-    min-height: 100vh;
+.funding-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
 }
 
-/* Main layout */
-.honors-page-content {
-    max-width: 1380px;
-    width: calc(100% - 48px);
-    margin: 36px auto 60px;
-    padding: 90px 0 40px;
-    line-height: 1.8;
-    color: #333;
-    box-sizing: border-box;
-    background: transparent;
+.funding-card {
+    padding: 18px 20px;
+    border-radius: var(--radius-md);
+    background: var(--card-bg-soft);
 }
 
-/* Intro */
-.honors-intro-block {
-    text-align: center;
-    margin: 0 0 34px 0;
-}
-
-.honors-page-title {
-    margin: 0 0 12px 0;
-    font-size: 2.4rem;
+.funding-title {
+    margin: 0 0 8px 0;
+    font-size: 1.05rem;
     font-weight: 700;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    color: #222;
 }
 
-.honors-page-intro {
-    margin: 0 auto;
-    max-width: 980px;
-    font-size: 1.03rem;
-    line-height: 1.9;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+.funding-text {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.7;
 }
 
-/* Section blocks */
-.honors-section-block {
-    margin-bottom: 28px;
-    padding: 24px 26px;
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-}
-
-/* Selected honors cards */
+/* =========================
+   Honors
+========================= */
 .honors-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1060,8 +681,8 @@ body.honors-page {
 
 .honor-card {
     padding: 20px;
-    background: rgba(255, 255, 255, 0.72);
-    border-radius: 14px;
+    background: var(--card-bg-soft);
+    border-radius: var(--radius-md);
 }
 
 .honor-year {
@@ -1081,11 +702,22 @@ body.honors-page {
 
 .honor-detail {
     margin: 0;
-    color: #444;
+    color: var(--text-muted);
     line-height: 1.7;
 }
 
-/* Year list */
+.honor-image-wrapper {
+    margin-top: 14px;
+}
+
+.honor-image-wrapper img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    background: #dfe7f0;
+}
+
 .honors-year-block {
     margin-bottom: 22px;
 }
@@ -1106,108 +738,13 @@ body.honors-page {
     line-height: 1.75;
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-    .honors-page-content {
-        width: calc(100% - 24px);
-        margin: 24px auto 40px;
-        padding-top: 76px;
-    }
-
-    .honors-page-title {
-        font-size: 2rem;
-    }
-
-    .honors-page-intro {
-        font-size: 0.98rem;
-        padding: 0 8px;
-    }
-
-    .honors-section-block {
-        padding: 18px 18px;
-    }
-
-    .honors-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    body.honors-page {
-        background-attachment: scroll;
-    }
-}
-
-.honor-image-wrapper {
-    margin-top: 14px;
-}
-
-.honor-image-wrapper img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    display: block;
-    border-radius: 12px;
-    background: #dfe7f0;
-}
-
 .honors-section-block + .honors-section-block {
     margin-top: 48px;
 }
 
-/* News page background */
-body.news-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
-    min-height: 100vh;
-}
-
-/* Main layout */
-.news-page-content {
-    max-width: 1380px;
-    width: calc(100% - 48px);
-    margin: 36px auto 60px;
-    padding: 90px 0 40px;
-    line-height: 1.8;
-    color: #333;
-    box-sizing: border-box;
-    background: transparent;
-}
-
-/* Intro */
-.news-intro-block {
-    text-align: center;
-    margin: 0 0 34px 0;
-}
-
-.news-page-title {
-    margin: 0 0 12px 0;
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-.news-page-intro {
-    margin: 0 auto;
-    max-width: 980px;
-    font-size: 1.03rem;
-    line-height: 1.9;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-/* Section blocks */
-.news-section-block {
-    margin-bottom: 28px;
-    padding: 24px 26px;
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-}
-
-/* Latest news cards */
+/* =========================
+   News
+========================= */
 .news-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1216,8 +753,8 @@ body.news-page {
 
 .news-card {
     padding: 20px;
-    background: rgba(255, 255, 255, 0.72);
-    border-radius: 14px;
+    background: var(--card-bg-soft);
+    border-radius: var(--radius-md);
 }
 
 .news-image-wrapper {
@@ -1228,8 +765,7 @@ body.news-page {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
-    display: block;
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
     background: #dfe7f0;
 }
 
@@ -1250,11 +786,10 @@ body.news-page {
 
 .news-text {
     margin: 0;
-    color: #444;
+    color: var(--text-muted);
     line-height: 1.7;
 }
 
-/* Archive */
 .news-archive {
     display: flex;
     flex-direction: column;
@@ -1266,8 +801,8 @@ body.news-page {
     grid-template-columns: 120px 1fr;
     gap: 18px;
     padding: 16px 18px;
-    background: rgba(255, 255, 255, 0.72);
-    border-radius: 12px;
+    background: var(--card-bg-soft);
+    border-radius: var(--radius-sm);
 }
 
 .archive-date {
@@ -1278,104 +813,32 @@ body.news-page {
 
 .archive-text {
     margin: 0;
-    color: #444;
+    color: var(--text-muted);
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-    .news-page-content {
-        width: calc(100% - 24px);
-        margin: 24px auto 40px;
-        padding-top: 76px;
-    }
-
-    .news-page-title {
-        font-size: 2rem;
-    }
-
-    .news-page-intro {
-        font-size: 0.98rem;
-        padding: 0 8px;
-    }
-
-    .news-section-block {
-        padding: 18px 18px;
-    }
-
-    .news-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .news-archive-item {
-        grid-template-columns: 1fr;
-        gap: 6px;
-    }
-}
-
-@media (max-width: 768px) {
-    body.news-page {
-        background-attachment: scroll;
-    }
-}
-
-/* Resources page background */
-body.resources-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
-    min-height: 100vh;
-}
-
-/* Main layout */
+/* =========================
+   Resources
+========================= */
 .resources-page-content {
-    max-width: 1380px;
-    width: calc(100% - 48px);
-    margin: 36px auto 60px;
-    padding: 90px 0 40px;
-    line-height: 1.8;
-    color: #333;
-    box-sizing: border-box;
-    background: transparent;
+    flex: 1;
 }
 
-/* Intro */
-.resources-intro-block {
-    text-align: center;
-    margin: 0 0 34px 0;
-}
-
-.resources-page-title {
-    margin: 0 0 12px 0;
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-.resources-page-intro {
-    margin: 0 auto;
-    max-width: 900px;
-    font-size: 1.03rem;
-    line-height: 1.9;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-/* Content block */
 .resources-section-block {
-    margin-bottom: 28px;
-    padding: 24px 26px;
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
 }
 
-/* Placeholder */
 .resources-placeholder-card {
+    max-width: 700px;
+    margin: 0 auto;
     text-align: center;
-    padding: 70px 20px;
-    background: rgba(255, 255, 255, 0.72);
-    border-radius: 14px;
+    padding: 56px 32px;
+    background: var(--card-bg);
+    border-radius: 18px;
+    box-shadow: var(--shadow-soft);
 }
 
 .resources-placeholder-title {
@@ -1388,123 +851,32 @@ body.resources-page {
 .resources-placeholder-text {
     margin: 0;
     font-size: 1rem;
-    color: #555;
+    color: var(--text-soft);
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-    .resources-page-content {
-        width: calc(100% - 24px);
-        margin: 24px auto 40px;
-        padding-top: 76px;
-    }
-
-    .resources-page-title {
-        font-size: 2rem;
-    }
-
-    .resources-page-intro {
-        font-size: 0.98rem;
-        padding: 0 8px;
-    }
-
-    .resources-section-block {
-        padding: 18px 18px;
-    }
-
-    .resources-placeholder-card {
-        padding: 50px 16px;
-    }
-
-    .resources-placeholder-title {
-        font-size: 1.7rem;
-    }
-}
-
-@media (max-width: 768px) {
-    body.resources-page {
-        background-attachment: scroll;
-    }
-}
-
-body.resources-page {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.resources-page-content {
-    flex: 1;
-}
-
-body.resources-page footer {
-    margin-top: auto;
-}
-
-/* Intranet page background */
-body.intranet-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Main layout */
+/* =========================
+   Intranet
+========================= */
 .intranet-page-content {
-    max-width: 1100px;
-    width: calc(100% - 48px);
-    margin: 36px auto 60px;
-    padding: 90px 0 60px;
-    line-height: 1.8;
-    color: #333;
-    box-sizing: border-box;
-    background: transparent;
     flex: 1;
 }
 
-/* Intro */
-.intranet-intro-block {
-    text-align: center;
-    margin: 0 0 32px 0;
-}
-
-.intranet-page-title {
-    margin: 0 0 12px 0;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-.intranet-page-intro {
-    margin: 0 auto;
-    max-width: 760px;
-    font-size: 1.02rem;
-    line-height: 1.9;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-/* No large outer panel */
 .intranet-section-block {
     margin: 0;
     padding: 0;
     background: transparent;
-    box-shadow: none;
     border-radius: 0;
+    box-shadow: none;
 }
 
-/* Single centered placeholder card */
 .intranet-placeholder-card {
     max-width: 700px;
     margin: 0 auto;
     text-align: center;
     padding: 56px 32px;
-    background: rgba(255, 255, 255, 0.82);
+    background: var(--card-bg);
     border-radius: 18px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-soft);
 }
 
 .intranet-placeholder-title {
@@ -1517,110 +889,22 @@ body.intranet-page {
 .intranet-placeholder-text {
     margin: 0;
     font-size: 1rem;
-    color: #555;
+    color: var(--text-soft);
 }
 
-/* Keep footer at bottom */
-body.intranet-page footer {
-    margin-top: auto;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-    .intranet-page-content {
-        width: calc(100% - 24px);
-        margin: 24px auto 40px;
-        padding-top: 76px;
-    }
-
-    .intranet-page-title {
-        font-size: 2rem;
-    }
-
-    .intranet-page-intro {
-        font-size: 0.98rem;
-        padding: 0 8px;
-    }
-
-    .intranet-placeholder-card {
-        padding: 44px 20px;
-    }
-
-    .intranet-placeholder-title {
-        font-size: 1.7rem;
-    }
-}
-
-@media (max-width: 768px) {
-    body.intranet-page {
-        background-attachment: scroll;
-    }
-}
-
-/* Gallery page background */
-body.gallery-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
-    min-height: 100vh;
-}
-
-/* Main layout */
-.gallery-page-content {
-    max-width: 1380px;
-    width: calc(100% - 48px);
-    margin: 36px auto 60px;
-    padding: 90px 0 40px;
-    line-height: 1.8;
-    color: #333;
-    box-sizing: border-box;
-    background: transparent;
-}
-
-/* Intro */
-.gallery-intro-block {
-    text-align: center;
-    margin: 0 0 34px 0;
-}
-
-.gallery-page-title {
-    margin: 0 0 12px 0;
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-.gallery-page-intro {
-    margin: 0 auto;
-    max-width: 980px;
-    font-size: 1.03rem;
-    line-height: 1.9;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-/* Section block */
-.gallery-section-block {
-    margin-bottom: 28px;
-    padding: 24px 26px;
-    background: rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-}
-
-/* Grid */
+/* =========================
+   Gallery
+========================= */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
 }
 
-/* Card */
 .gallery-card {
     padding: 20px;
-    background: rgba(255, 255, 255, 0.72);
-    border-radius: 14px;
+    background: var(--card-bg-soft);
+    border-radius: var(--radius-md);
 }
 
 .gallery-image-wrapper {
@@ -1631,8 +915,7 @@ body.gallery-page {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
-    display: block;
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
     background: #dfe7f0;
 }
 
@@ -1646,133 +929,164 @@ body.gallery-page {
 
 .gallery-card-text {
     margin: 0;
-    color: #444;
+    color: var(--text-muted);
     line-height: 1.7;
 }
 
-/* Mobile */
+/* =========================
+   Responsive
+========================= */
 @media (max-width: 900px) {
-    .gallery-page-content {
-        width: calc(100% - 24px);
-        margin: 24px auto 40px;
-        padding-top: 76px;
+    .navbar ul {
+        gap: 16px;
     }
 
-    .gallery-page-title {
-        font-size: 2rem;
+    .navbar ul li a {
+        font-size: 1rem;
     }
 
-    .gallery-page-intro {
-        font-size: 0.98rem;
-        padding: 0 8px;
-    }
-
-    .gallery-section-block {
-        padding: 18px 18px;
-    }
-
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    body.gallery-page {
-        background-attachment: scroll;
-    }
-}
-
-/* Home page background */
-body.home-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)),
-                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
-    background-color: #eaf2f8;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Main layout */
-.home-page-content {
-    max-width: 1100px;
-    width: calc(100% - 48px);
-    margin: 36px auto 60px;
-    padding: 90px 0 60px;
-    box-sizing: border-box;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* Intro */
-.home-intro-block {
-    text-align: center;
-    margin-bottom: 28px;
-}
-
-.home-page-title {
-    margin: 0 0 10px 0;
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-.home-page-intro {
-    margin: 0;
-    font-size: 1.1rem;
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-}
-
-/* Logo card */
-.home-logo-card {
-    max-width: 520px;
-    margin: 0 auto;
-    padding: 36px 32px;
-    background: rgba(255, 255, 255, 0.18);
-    border-radius: 22px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-    text-align: center;
-}
-
-.home-logo-card img {
-    width: 100%;
-    max-width: 420px;
-    display: block;
-    margin: 0 auto;
-    border-radius: 18px;
-}
-
-/* Keep footer at bottom */
-body.home-page footer {
-    margin-top: auto;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
+    .publications,
+    .recruitment,
+    .contact-layout,
+    .research-page-content,
+    .honors-page-content,
+    .news-page-content,
+    .gallery-page-content,
+    body.members-page .team-container,
+    .resources-page-content,
+    .intranet-page-content,
     .home-page-content {
         width: calc(100% - 24px);
         margin: 24px auto 40px;
         padding-top: 76px;
     }
 
-    .home-page-title {
+    .home-page-content,
+    .resources-page-content,
+    .intranet-page-content {
+        padding-bottom: 40px;
+    }
+
+    .home-page-title,
+    .contact-layout h1,
+    .publications h1,
+    .recruitment h1 {
         font-size: 2.2rem;
+    }
+
+    .research-page-title,
+    .honors-page-title,
+    .news-page-title,
+    .gallery-page-title,
+    .resources-page-title,
+    .intranet-page-title,
+    .members-intro-title {
+        font-size: 2rem;
+    }
+
+    .members-intro-text,
+    .research-page-intro,
+    .honors-page-intro,
+    .news-page-intro,
+    .gallery-page-intro,
+    .resources-page-intro,
+    .intranet-page-intro {
+        font-size: 0.98rem;
+        padding: 0 8px;
+    }
+
+    body.members-page .team-member,
+    .publication,
+    .publication-note,
+    .contact-intro,
+    .contact-card,
+    .research-section-block,
+    .honors-section-block,
+    .news-section-block,
+    .gallery-section-block {
+        padding: 18px 18px;
+    }
+
+    body.members-page .member-info {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    body.members-page .member-info img {
+        max-width: 260px;
+    }
+
+    body.members-page .member-text h3 {
+        font-size: 1.8rem;
+    }
+
+    #jing-chen-member .bio-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    #jing-chen-member .bio-date {
+        white-space: normal;
+    }
+
+    .publication-title {
+        font-size: 1.2rem;
+    }
+
+    .recruitment > p,
+    .recruitment-item,
+    .recruitment ul {
+        padding: 18px 18px;
+    }
+
+    .recruitment ul {
+        padding-left: 36px;
+    }
+
+    .research-grid,
+    .funding-grid,
+    .honors-grid,
+    .news-grid,
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-archive-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .resources-placeholder-card,
+    .intranet-placeholder-card {
+        padding: 44px 20px;
+    }
+
+    .resources-placeholder-title,
+    .intranet-placeholder-title {
+        font-size: 1.7rem;
+    }
+
+    .home-logo-card {
+        padding: 20px 16px;
     }
 
     .home-page-intro {
         font-size: 1rem;
     }
-
-    .home-logo-card {
-        padding: 24px 20px;
-    }
 }
 
 @media (max-width: 768px) {
-    body.home-page {
+    body.home-page,
+    body.members-page,
+    body.publications-page,
+    body.recruitment-page,
+    body.contact-page,
+    body.research-page,
+    body.honors-page,
+    body.news-page,
+    body.resources-page,
+    body.intranet-page,
+    body.gallery-page {
         background-attachment: scroll;
     }
 }
