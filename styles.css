@@ -323,6 +323,18 @@ body.members-page .bio p {
     line-height: 1.65;
 }
 
+.member-category {
+    margin-bottom: 42px;
+}
+
+.member-category-title {
+    margin: 0 0 20px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
 /* Jing Chen special block */
 #jing-chen-member {
     background: var(--card-bg-strong);
