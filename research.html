@@ -6,7 +6,8 @@
     <title>Research - CHENJ-Lab</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="research-page">
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <ul>
@@ -25,18 +26,67 @@
     </nav>
 
     <!-- Research Section -->
-    <section id="research">
-        <h2>Research Directions</h2>
-        <p>Research in Molecular Biology, Genetics, and more.</p>
+    <section class="research-page-content">
+        <div class="research-intro-block">
+            <p class="research-page-title">Research</p>
+            <p class="research-page-intro">
+                Our research focuses on fundamental questions in development and disease.
+                Detailed research content will be presented through visual panels below.
+            </p>
+        </div>
 
-        <h3>Upload an Image Here:</h3>
-        <input type="file" id="uploadImage" name="uploadImage">
-        <p><i>Upload a relevant image for this section.</i></p>
+        <div class="research-section-block">
+            <h2 class="section-title">Research Directions</h2>
+
+            <div class="research-grid">
+                <div class="research-image-card">
+                    <h3>Research Direction 1</h3>
+                    <img src="research-1.jpg" alt="Research Direction 1">
+                </div>
+
+                <div class="research-image-card">
+                    <h3>Research Direction 2</h3>
+                    <img src="research-2.jpg" alt="Research Direction 2">
+                </div>
+
+                <div class="research-image-card">
+                    <h3>Research Direction 3</h3>
+                    <img src="research-3.jpg" alt="Research Direction 3">
+                </div>
+
+                <div class="research-image-card">
+                    <h3>Research Direction 4</h3>
+                    <img src="research-4.jpg" alt="Research Direction 4">
+                </div>
+            </div>
+        </div>
+
+        <div class="research-section-block funding-block">
+            <h2 class="section-title">Funding</h2>
+
+            <div class="funding-grid">
+                <div class="funding-card">
+                    <p class="funding-title">Funding Item 1</p>
+                    <p class="funding-text">Project title / grant number / year</p>
+                </div>
+
+                <div class="funding-card">
+                    <p class="funding-title">Funding Item 2</p>
+                    <p class="funding-text">Project title / grant number / year</p>
+                </div>
+
+                <div class="funding-card">
+                    <p class="funding-title">Funding Item 3</p>
+                    <p class="funding-text">Project title / grant number / year</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer Section -->
     <footer>
         <p>&copy; 2026 CHENJ-Lab</p>
     </footer>
+
 </body>
 </html>
