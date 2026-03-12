@@ -1030,3 +1030,155 @@ body.research-page {
 .funding-subsection-title:not(:first-of-type) {
     margin-top: 28px;
 }
+
+/* Honors page background */
+body.honors-page {
+    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
+                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
+    background-color: #eaf2f8;
+    min-height: 100vh;
+}
+
+/* Main layout */
+.honors-page-content {
+    max-width: 1380px;
+    width: calc(100% - 48px);
+    margin: 36px auto 60px;
+    padding: 90px 0 40px;
+    line-height: 1.8;
+    color: #333;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+/* Intro */
+.honors-intro-block {
+    text-align: center;
+    margin: 0 0 34px 0;
+}
+
+.honors-page-title {
+    margin: 0 0 12px 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.honors-page-intro {
+    margin: 0 auto;
+    max-width: 980px;
+    font-size: 1.03rem;
+    line-height: 1.9;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* Section blocks */
+.honors-section-block {
+    margin-bottom: 28px;
+    padding: 24px 26px;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* Selected honors cards */
+.honors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.honor-card {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 14px;
+}
+
+.honor-year {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #5b6f8a;
+}
+
+.honor-title {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #222;
+    line-height: 1.5;
+}
+
+.honor-detail {
+    margin: 0;
+    color: #444;
+    line-height: 1.7;
+}
+
+/* Year list */
+.honors-year-block {
+    margin-bottom: 22px;
+}
+
+.honors-year-title {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #222;
+}
+
+.honors-list {
+    margin: 0;
+    padding-left: 22px;
+}
+
+.honors-list li {
+    margin-bottom: 8px;
+    line-height: 1.75;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .honors-page-content {
+        width: calc(100% - 24px);
+        margin: 24px auto 40px;
+        padding-top: 76px;
+    }
+
+    .honors-page-title {
+        font-size: 2rem;
+    }
+
+    .honors-page-intro {
+        font-size: 0.98rem;
+        padding: 0 8px;
+    }
+
+    .honors-section-block {
+        padding: 18px 18px;
+    }
+
+    .honors-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body.honors-page {
+        background-attachment: scroll;
+    }
+}
+
+.honor-image-wrapper {
+    margin-top: 14px;
+}
+
+.honor-image-wrapper img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    background: #dfe7f0;
+}
