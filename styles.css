@@ -874,3 +874,147 @@ body.contact-page {
         font-size: 2.2rem;
     }
 }
+/* Research page background */
+body.research-page {
+    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
+                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
+    background-color: #eaf2f8;
+    min-height: 100vh;
+}
+
+/* Main layout */
+.research-page-content {
+    max-width: 1380px;
+    width: calc(100% - 48px);
+    margin: 36px auto 60px;
+    padding: 90px 0 40px;
+    line-height: 1.8;
+    color: #333;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+/* Intro */
+.research-intro-block {
+    text-align: center;
+    margin: 0 0 34px 0;
+}
+
+.research-page-title {
+    margin: 0 0 12px 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.research-page-intro {
+    margin: 0 auto;
+    max-width: 980px;
+    font-size: 1.03rem;
+    line-height: 1.9;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* Section blocks */
+.research-section-block {
+    margin-bottom: 28px;
+    padding: 24px 26px;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+    margin: 0 0 18px 0;
+    font-size: 1.7rem;
+    color: #222;
+}
+
+/* Research image area */
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.research-image-card {
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 14px;
+    padding: 18px;
+}
+
+.research-image-card h3 {
+    margin: 0 0 14px 0;
+    font-size: 1.15rem;
+    color: #222;
+}
+
+.research-image-card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    background: #dfe7f0;
+}
+
+/* Funding area */
+.funding-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.funding-card {
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.funding-title {
+    margin: 0 0 8px 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #222;
+}
+
+.funding-text {
+    margin: 0;
+    color: #444;
+    line-height: 1.7;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .research-page-content {
+        width: calc(100% - 24px);
+        margin: 24px auto 40px;
+        padding-top: 76px;
+    }
+
+    .research-page-title {
+        font-size: 2rem;
+    }
+
+    .research-page-intro {
+        font-size: 0.98rem;
+        padding: 0 8px;
+    }
+
+    .research-section-block {
+        padding: 18px 18px;
+    }
+
+    .research-grid,
+    .funding-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body.research-page {
+        background-attachment: scroll;
+    }
+}
