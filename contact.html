@@ -6,7 +6,7 @@
     <title>Contact - CHENJ-Lab</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="contact-page">
 
     <!-- Navigation Bar -->
     <nav class="navbar">
@@ -25,29 +25,49 @@
         </ul>
     </nav>
 
-    <!-- Hero Image Section -->
-    <header class="hero-image">
-        <h1>Contact Us</h1>
-        <p>We are here to connect with you!</p>
-    </header>
-
     <!-- Contact Section -->
-    <section class="contact">
-        <h2>Get in Touch</h2>
-        
-        <!-- Email Section -->
-        <div class="email">
-            <p><strong>Email:</strong> <span id="email-link" style="color: #03045E; cursor: pointer;">Click to Reveal</span></p>
-            <p id="actual-email" style="display: none;">jingchen@scu.edu.cn</p>
+    <section class="contact contact-layout">
+        <h1>Contact Us</h1>
+        <p class="contact-intro">
+            We welcome inquiries from prospective students, collaborators, and visitors.
+            Please feel free to contact us through the information below.
+        </p>
+
+        <div class="contact-card">
+            <h2>Get in Touch</h2>
+            <p>
+                <strong>Email:</strong>
+                <span id="email-link" class="reveal-email">Click to Reveal</span>
+            </p>
+            <p id="actual-email" class="hidden-email">
+                <a href="mailto:jingchen@scu.edu.cn">jingchen@scu.edu.cn</a>
+            </p>
         </div>
 
-        <!-- Lab Location Section -->
-        <div class="location">
-            <p><strong>Lab Location:</strong></p>
-            <p>Tianfu Life Science Park, No. 88 South Keyuan Road, Chengdu High-tech Zone, Chengdu, Sichuan, China 610041, R&D Building B2, B808.</p>
-            <p>中国四川省成都市高新区科园南路88号天府生命科技园研发楼B2栋B808室</p>
-            <p>B3 Area, 9th Floor, Block B, Building D5, Chengdu Frontiers Medical Center, Xinchuan Road, Huayang Subdistrict, Shuangliu District, Chengdu, Sichuan, China</p>
-            <p>中国四川省成都市双流区华阳街道新川路成都前沿医学中心D5栋B座9楼B3区</p>
+        <div class="contact-card">
+            <h2>Lab Location 1</h2>
+            <p><strong>English:</strong></p>
+            <p>
+                Tianfu Life Science Park, No. 88 South Keyuan Road, Chengdu High-tech Zone,
+                Chengdu, Sichuan, China 610041, R&amp;D Building B2, B808
+            </p>
+            <p><strong>中文：</strong></p>
+            <p>
+                中国四川省成都市高新区科园南路88号天府生命科技园研发楼B2栋B808室，邮编610041
+            </p>
+        </div>
+
+        <div class="contact-card">
+            <h2>Lab Location 2</h2>
+            <p><strong>English:</strong></p>
+            <p>
+                B3 Area, 9th Floor, Block B, Building D5, Chengdu Frontiers Medical Center,
+                Xinchuan Road, Huayang Subdistrict, Shuangliu District, Chengdu, Sichuan, China
+            </p>
+            <p><strong>中文：</strong></p>
+            <p>
+                中国四川省成都市双流区华阳街道新川路成都前沿医学中心D5栋B座9楼B3区
+            </p>
         </div>
     </section>
 
@@ -57,7 +77,6 @@
     </footer>
 
     <script>
-        // JavaScript to reveal email
         document.getElementById("email-link").addEventListener("click", function() {
             document.getElementById("actual-email").style.display = "block";
             document.getElementById("email-link").style.display = "none";
