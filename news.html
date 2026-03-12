@@ -6,7 +6,8 @@
     <title>News - CHENJ-Lab</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="news-page">
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <ul>
@@ -25,18 +26,89 @@
     </nav>
 
     <!-- News Section -->
-    <section id="news">
-        <h2>Latest News</h2>
-        <p>Stay tuned for the latest updates about our research and achievements.</p>
+    <section class="news-page-content">
+        <div class="news-intro-block">
+            <p class="news-page-title">News</p>
+            <p class="news-page-intro">
+                Stay updated with the latest news, achievements, events, and activities from CHENJ-Lab.
+            </p>
+        </div>
 
-        <h3>Upload an Image Here:</h3>
-        <input type="file" id="uploadImage" name="uploadImage">
-        <p><i>Upload a relevant image for this section.</i></p>
+        <div class="news-section-block">
+            <h2 class="section-title">Latest News</h2>
+
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image-wrapper">
+                        <img src="首页.png" alt="News 1">
+                    </div>
+                    <p class="news-date">2026.03</p>
+                    <h3 class="news-title">News Title 1</h3>
+                    <p class="news-text">
+                        Finally,we got our lab website! WoW!
+                    </p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image-wrapper">
+                        <img src="news-2.jpg" alt="News 2">
+                    </div>
+                    <p class="news-date">2025.12</p>
+                    <h3 class="news-title">News Title 2</h3>
+                    <p class="news-text">
+                        A short summary of the news can be placed here. You can replace this text with the actual update later.
+                    </p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image-wrapper">
+                        <img src="news-3.jpg" alt="News 3">
+                    </div>
+                    <p class="news-date">2025.10</p>
+                    <h3 class="news-title">News Title 3</h3>
+                    <p class="news-text">
+                        A short summary of the news can be placed here. You can replace this text with the actual update later.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="news-section-block">
+            <h2 class="section-title">News Archive</h2>
+
+            <div class="news-archive">
+                <div class="news-archive-item">
+                    <p class="archive-date">2026.01</p>
+                    <p class="archive-text">News item title or short update goes here.</p>
+                </div>
+
+                <div class="news-archive-item">
+                    <p class="archive-date">2025.12</p>
+                    <p class="archive-text">News item title or short update goes here.</p>
+                </div>
+
+                <div class="news-archive-item">
+                    <p class="archive-date">2025.10</p>
+                    <p class="archive-text">News item title or short update goes here.</p>
+                </div>
+
+                <div class="news-archive-item">
+                    <p class="archive-date">2025.08</p>
+                    <p class="archive-text">News item title or short update goes here.</p>
+                </div>
+
+                <div class="news-archive-item">
+                    <p class="archive-date">2025.05</p>
+                    <p class="archive-text">News item title or short update goes here.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer Section -->
     <footer>
         <p>&copy; 2026 CHENJ-Lab</p>
     </footer>
+
 </body>
 </html>
