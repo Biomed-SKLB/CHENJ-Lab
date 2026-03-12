@@ -1182,3 +1182,7 @@ body.honors-page {
     border-radius: 12px;
     background: #dfe7f0;
 }
+
+.honors-section-block + .honors-section-block {
+    margin-top: 48px;
+}
