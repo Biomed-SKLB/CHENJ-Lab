@@ -1349,3 +1349,112 @@ body.news-page {
         background-attachment: scroll;
     }
 }
+
+/* Resources page background */
+body.resources-page {
+    background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
+                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
+    background-color: #eaf2f8;
+    min-height: 100vh;
+}
+
+/* Main layout */
+.resources-page-content {
+    max-width: 1380px;
+    width: calc(100% - 48px);
+    margin: 36px auto 60px;
+    padding: 90px 0 40px;
+    line-height: 1.8;
+    color: #333;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+/* Intro */
+.resources-intro-block {
+    text-align: center;
+    margin: 0 0 34px 0;
+}
+
+.resources-page-title {
+    margin: 0 0 12px 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.resources-page-intro {
+    margin: 0 auto;
+    max-width: 900px;
+    font-size: 1.03rem;
+    line-height: 1.9;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* Content block */
+.resources-section-block {
+    margin-bottom: 28px;
+    padding: 24px 26px;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* Placeholder */
+.resources-placeholder-card {
+    text-align: center;
+    padding: 70px 20px;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 14px;
+}
+
+.resources-placeholder-title {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #222;
+}
+
+.resources-placeholder-text {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .resources-page-content {
+        width: calc(100% - 24px);
+        margin: 24px auto 40px;
+        padding-top: 76px;
+    }
+
+    .resources-page-title {
+        font-size: 2rem;
+    }
+
+    .resources-page-intro {
+        font-size: 0.98rem;
+        padding: 0 8px;
+    }
+
+    .resources-section-block {
+        padding: 18px 18px;
+    }
+
+    .resources-placeholder-card {
+        padding: 50px 16px;
+    }
+
+    .resources-placeholder-title {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body.resources-page {
+        background-attachment: scroll;
+    }
+}
