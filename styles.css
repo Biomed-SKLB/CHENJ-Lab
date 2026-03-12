@@ -1117,3 +1117,69 @@ body.members-page .bio p {
         background-attachment: scroll;
     }
 }
+
+/* Make regular member cards more compact */
+body.members-page .team-member:not(#jing-chen-member) {
+    padding: 18px 20px;
+}
+
+/* More compact layout for regular members */
+body.members-page .team-member:not(#jing-chen-member) .member-info {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+}
+
+/* Smaller and more consistent photo size */
+body.members-page .team-member:not(#jing-chen-member) .member-info img {
+    width: 100%;
+    max-width: 240px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Slightly smaller title */
+body.members-page .team-member:not(#jing-chen-member) .member-text h3 {
+    font-size: 1.8rem;
+    margin: 0 0 8px 0;
+}
+
+/* Tighter text spacing */
+body.members-page .team-member:not(#jing-chen-member) .position {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+body.members-page .team-member:not(#jing-chen-member) .research {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+body.members-page .team-member:not(#jing-chen-member) .bio {
+    margin-top: 0;
+}
+
+body.members-page .team-member:not(#jing-chen-member) .bio p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    body.members-page .team-member:not(#jing-chen-member) .member-info {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    body.members-page .team-member:not(#jing-chen-member) .member-info img {
+        max-width: 220px;
+    }
+
+    body.members-page .team-member:not(#jing-chen-member) .member-text h3 {
+        font-size: 1.6rem;
+    }
+}
