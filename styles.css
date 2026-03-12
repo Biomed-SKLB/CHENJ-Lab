@@ -1713,3 +1713,98 @@ body.gallery-page {
         background-attachment: scroll;
     }
 }
+
+/* Home page background */
+body.home-page {
+    background: linear-gradient(rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)),
+                url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
+    background-color: #eaf2f8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main layout */
+.home-page-content {
+    max-width: 1100px;
+    width: calc(100% - 48px);
+    margin: 36px auto 60px;
+    padding: 90px 0 60px;
+    box-sizing: border-box;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Intro */
+.home-intro-block {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.home-page-title {
+    margin: 0 0 10px 0;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.home-page-intro {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* Logo card */
+.home-logo-card {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 36px 32px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 22px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    text-align: center;
+}
+
+.home-logo-card img {
+    width: 100%;
+    max-width: 420px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 18px;
+}
+
+/* Keep footer at bottom */
+body.home-page footer {
+    margin-top: auto;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .home-page-content {
+        width: calc(100% - 24px);
+        margin: 24px auto 40px;
+        padding-top: 76px;
+    }
+
+    .home-page-title {
+        font-size: 2.2rem;
+    }
+
+    .home-page-intro {
+        font-size: 1rem;
+    }
+
+    .home-logo-card {
+        padding: 24px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    body.home-page {
+        background-attachment: scroll;
+    }
+}
