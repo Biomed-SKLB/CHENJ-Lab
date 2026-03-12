@@ -1019,3 +1019,14 @@ body.research-page {
         background-attachment: scroll;
     }
 }
+
+.funding-subsection-title {
+    margin: 8px 0 16px 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #222;
+}
+
+.funding-subsection-title:not(:first-of-type) {
+    margin-top: 28px;
+}
