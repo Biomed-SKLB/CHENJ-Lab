@@ -178,24 +178,33 @@ body.members-page .team-container {
 ========================= */
 body.home-page {
     background:
-        linear-gradient(rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10));
-    background-color: var(--bg-home);
+        linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)),
+        url("cjlogo_20260226201956_250_76.png") center center / cover no-repeat fixed;
+    background-color: var(--bg-page);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .home-page-content {
+    max-width: var(--page-width-mid);
+    width: calc(100% - 48px);
+    margin: 36px auto 60px;
+    padding: var(--nav-offset) 0 60px;
+    box-sizing: border-box;
     flex: 1;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .home-intro-block {
-    text-align: center;
-    margin-bottom: 28px;
+    width: 100%;
 }
 
 .home-page-title {
-    margin: 0 0 10px 0;
+    margin: 0 0 12px 0;
     font-size: 2.8rem;
     font-weight: 700;
     color: var(--text-light);
@@ -209,21 +218,25 @@ body.home-page {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
 
-.home-logo-card {
-    max-width: 520px;
-    margin: 0 auto;
-    padding: 0;
-    background: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    text-align: center;
+body.home-page footer {
+    margin-top: auto;
 }
 
-.home-logo-card img {
-    width: 100%;
-    max-width: 440px;
-    margin: 0 auto;
-    border-radius: 22px;
+@media (max-width: 900px) {
+    .home-page-content {
+        width: calc(100% - 24px);
+        margin: 24px auto 40px;
+        padding-top: 76px;
+        padding-bottom: 40px;
+    }
+
+    .home-page-title {
+        font-size: 2.2rem;
+    }
+
+    .home-page-intro {
+        font-size: 1rem;
+    }
 }
 
 /* =========================
