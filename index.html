@@ -38,7 +38,8 @@
         <button id="close-easter-egg" class="easter-egg-close">&times;</button>
         <p class="easter-egg-text">
             I have always thought of this place as my home.<br><br>
-            To whoever joins CHENJ-Lab in the future, I hope that what once warmed me here will also warm you.'Mingpeng Li'
+            To whoever joins CHENJ-Lab in the future, I hope that what once warmed me here will also warm you.<br><br>
+            ——Mingpeng Li
         </p>
     </div>
 </div>
@@ -47,5 +48,30 @@
     <p>&copy; 2026 CHENJ-Lab | <span id="secret-trigger" class="secret-trigger">Built by Mingpeng Li</span></p>
 </footer>
 
+<script>
+    let secretClickCount = 0;
+    const secretTrigger = document.getElementById("secret-trigger");
+    const easterEgg = document.getElementById("easter-egg");
+    const closeEasterEgg = document.getElementById("close-easter-egg");
+
+    secretTrigger.addEventListener("click", function () {
+        secretClickCount++;
+        if (secretClickCount >= 5) {
+            easterEgg.classList.add("show-easter-egg");
+            secretClickCount = 0;
+        }
+    });
+
+    closeEasterEgg.addEventListener("click", function () {
+        easterEgg.classList.remove("show-easter-egg");
+    });
+
+    easterEgg.addEventListener("click", function (e) {
+        if (e.target === easterEgg) {
+            easterEgg.classList.remove("show-easter-egg");
+        }
+    });
+</script>
+    
 </body>
 </html>
