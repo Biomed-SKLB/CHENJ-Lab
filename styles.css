@@ -1195,3 +1195,51 @@ body.members-page .team-member:not(#jing-chen-member) .bio p {
         font-size: 1.6rem;
     }
 }
+
+.secret-trigger {
+    cursor: pointer;
+}
+
+.easter-egg-hidden {
+    display: none;
+}
+
+#easter-egg.show-easter-egg {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 20px;
+}
+
+.easter-egg-box {
+    position: relative;
+    max-width: 680px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 18px;
+    padding: 32px 28px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+.easter-egg-text {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #333;
+}
+
+.easter-egg-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    border: none;
+    background: transparent;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #666;
+}
