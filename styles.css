@@ -286,7 +286,7 @@ body.members-page .member-info {
 
 body.members-page .member-info img {
     width: 100%;
-    max-width: 300px;
+    max-width: 260px;
     border-radius: 14px;
     object-fit: cover;
 }
@@ -1145,7 +1145,7 @@ body.members-page .team-member:not(#jing-chen-member) .member-info {
 /* Smaller and more consistent photo size */
 body.members-page .team-member:not(#jing-chen-member) .member-info img {
     width: 100%;
-    max-width: 200px;
+    max-width: 240px;
     aspect-ratio: 4 / 5;
     object-fit: cover;
     border-radius: 12px;
