@@ -7,35 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<div id="research-lightbox" class="research-lightbox">
-    <span id="research-lightbox-close" class="research-lightbox-close">&times;</span>
-    <img id="research-lightbox-img" class="research-lightbox-img" src="" alt="Enlarged image">
-</div>
-
-<script>
-    const researchImages = document.querySelectorAll(".research-clickable-image");
-    const researchLightbox = document.getElementById("research-lightbox");
-    const researchLightboxImg = document.getElementById("research-lightbox-img");
-    const researchLightboxClose = document.getElementById("research-lightbox-close");
-
-    researchImages.forEach(img => {
-        img.addEventListener("click", function () {
-            researchLightboxImg.src = this.src;
-            researchLightbox.style.display = "flex";
-        });
-    });
-
-    researchLightboxClose.addEventListener("click", function () {
-        researchLightbox.style.display = "none";
-    });
-
-    researchLightbox.addEventListener("click", function (e) {
-        if (e.target === researchLightbox) {
-            researchLightbox.style.display = "none";
-        }
-    });
-</script>
-    
 <body class="research-page">
 
     <!-- Navigation Bar -->
@@ -46,11 +17,9 @@
             <li><a href="honors.html">Honors</a></li>
             <li><a href="research.html">Research</a></li>
             <li><a href="publications.html">Publications</a></li>
-            <!-- <li><a href="resources.html">Resources</a></li> -->
             <li><a href="members.html">Members</a></li>
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="recruitment.html">Recruitment</a></li>
-            <!-- <li><a href="intranet.html">Intranet</a></li> -->
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
@@ -61,7 +30,7 @@
             <p class="research-page-title">Research</p>
             <p class="research-page-intro">
                 Our research focuses on fundamental questions in development and disease.
-                Detailed research content will be presented through visual panels below.
+                Detailed research content is presented through the visual panels below.
             </p>
         </div>
 
@@ -69,104 +38,200 @@
             <h2 class="section-title">Research Directions</h2>
 
             <div class="research-grid">
-                <div class="research-image-card">
+                <article class="research-image-card">
                     <h3>Organoid models for investigating limb development</h3>
-                    <img src="limborgan.png" alt="Organoid models for investigating limb development" class="research-clickable-image">
-                </div>
+                    <button
+                        class="research-image-button"
+                        type="button"
+                        data-full="limborgan.png"
+                        data-title="Organoid models for investigating limb development"
+                        aria-label="Open enlarged image: Organoid models for investigating limb development"
+                    >
+                        <img
+                            src="limborgan.png"
+                            alt="Organoid models for investigating limb development"
+                            class="research-clickable-image"
+                            loading="lazy"
+                        >
+                    </button>
+                </article>
 
-                <div class="research-image-card">
+                <article class="research-image-card">
                     <h3>Zebrafish models for investigating huluwa gene regulation</h3>
-                    <img src="hwa.gif" alt="Zebrafish models for investigating huluwa gene regulation" class="research-clickable-image">
-                </div>
+                    <button
+                        class="research-image-button"
+                        type="button"
+                        data-full="hwa.gif"
+                        data-title="Zebrafish models for investigating huluwa gene regulation"
+                        aria-label="Open enlarged image: Zebrafish models for investigating huluwa gene regulation"
+                    >
+                        <img
+                            src="hwa.gif"
+                            alt="Zebrafish models for investigating huluwa gene regulation"
+                            class="research-clickable-image"
+                            loading="lazy"
+                        >
+                    </button>
+                </article>
 
-                <div class="research-image-card">
+                <article class="research-image-card">
                     <h3>Epigenetics in zebrafish</h3>
-                    <img src="rd3.jpg" alt="Epigenetics in zebrafish" class="research-clickable-image">
-                </div>
-
+                    <button
+                        class="research-image-button"
+                        type="button"
+                        data-full="rd3.jpg"
+                        data-title="Epigenetics in zebrafish"
+                        aria-label="Open enlarged image: Epigenetics in zebrafish"
+                    >
+                        <img
+                            src="rd3.jpg"
+                            alt="Epigenetics in zebrafish"
+                            class="research-clickable-image"
+                            loading="lazy"
+                        >
+                    </button>
+                </article>
             </div>
         </div>
 
         <div class="research-section-block funding-block">
-    <h2 class="section-title">Funding</h2>
+            <h2 class="section-title">Funding</h2>
 
-    <h3 class="funding-subsection-title">Ongoing</h3>
-    <div class="funding-grid">
-        <div class="funding-card">
-            <p class="funding-title">National Natural Science Foundation of China, Excellent Young Scientists Fund (B)</p>
-            <p class="funding-text">Jan 2026 – Dec 2028</p>
-        </div>
+            <h3 class="funding-subsection-title">Ongoing</h3>
+            <div class="funding-grid">
+                <div class="funding-card">
+                    <p class="funding-title">National Natural Science Foundation of China, Excellent Young Scientists Fund (B)</p>
+                    <p class="funding-text">Jan 2026 – Dec 2028</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">Sichuan Natural Science Foundation, Youth Science Foundation (Category A)</p>
-            <p class="funding-text">Jan 2026 – Dec 2028</p>
-        </div>
+                <div class="funding-card">
+                    <p class="funding-title">Sichuan Natural Science Foundation, Youth Science Foundation (Category A)</p>
+                    <p class="funding-text">Jan 2026 – Dec 2028</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">National Natural Science Foundation of China, General Program</p>
-            <p class="funding-text">Jan 2025 – Dec 2028</p>
-        </div>
+                <div class="funding-card">
+                    <p class="funding-title">National Natural Science Foundation of China, General Program</p>
+                    <p class="funding-text">Jan 2025 – Dec 2028</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">Sichuan Natural Science Foundation, General Program</p>
-            <p class="funding-text">Jan 2024 – Dec 2025</p>
-        </div>
+                <div class="funding-card">
+                    <p class="funding-title">Sichuan Natural Science Foundation, General Program</p>
+                    <p class="funding-text">Jan 2024 – Dec 2025</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">West China Hospital, Sichuan University, 1·3·5 Clinical Research Fund</p>
-            <p class="funding-text">May 2024 – Apr 2026</p>
-        </div>
+                <div class="funding-card">
+                    <p class="funding-title">West China Hospital, Sichuan University, 1·3·5 Clinical Research Fund</p>
+                    <p class="funding-text">May 2024 – Apr 2026</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">National Key Research and Development Program of China, Subproject</p>
-            <p class="funding-text">Dec 2022 – Nov 2026</p>
-        </div>
+                <div class="funding-card">
+                    <p class="funding-title">National Key Research and Development Program of China, Subproject</p>
+                    <p class="funding-text">Dec 2022 – Nov 2026</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">National Natural Science Foundation of China, General Program</p>
-            <p class="funding-text">Jan 2022 – Dec 2025</p>
-        </div>
-    </div>
+                <div class="funding-card">
+                    <p class="funding-title">National Natural Science Foundation of China, General Program</p>
+                    <p class="funding-text">Jan 2022 – Dec 2025</p>
+                </div>
+            </div>
 
-    <h3 class="funding-subsection-title">Completed</h3>
-    <div class="funding-grid">
-        <div class="funding-card">
-            <p class="funding-title">Sichuan Natural Science Foundation, Youth Project</p>
-            <p class="funding-text">Jan 2022 – Dec 2023</p>
-        </div>
+            <h3 class="funding-subsection-title">Completed</h3>
+            <div class="funding-grid">
+                <div class="funding-card">
+                    <p class="funding-title">Sichuan Natural Science Foundation, Youth Project</p>
+                    <p class="funding-text">Jan 2022 – Dec 2023</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">Key Research and Development Project of Sichuan Science and Technology Department</p>
-            <p class="funding-text">Jan 2020 – Dec 2021</p>
-        </div>
+                <div class="funding-card">
+                    <p class="funding-title">Key Research and Development Project of Sichuan Science and Technology Department</p>
+                    <p class="funding-text">Jan 2020 – Dec 2021</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">National Key Research and Development Program of China, Subproject</p>
-            <p class="funding-text">Sep 2019 – Aug 2024</p>
-        </div>
+                <div class="funding-card">
+                    <p class="funding-title">National Key Research and Development Program of China, Subproject</p>
+                    <p class="funding-text">Sep 2019 – Aug 2024</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">National Natural Science Foundation of China, General Program</p>
-            <p class="funding-text">Jan 2019 – Dec 2022</p>
-        </div>
+                <div class="funding-card">
+                    <p class="funding-title">National Natural Science Foundation of China, General Program</p>
+                    <p class="funding-text">Jan 2019 – Dec 2022</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">China Postdoctoral Science Foundation</p>
-            <p class="funding-text">Jan 2018 – Dec 2018</p>
-        </div>
+                <div class="funding-card">
+                    <p class="funding-title">China Postdoctoral Science Foundation</p>
+                    <p class="funding-text">Jan 2018 – Dec 2018</p>
+                </div>
 
-        <div class="funding-card">
-            <p class="funding-title">National Key Research and Development Program of China</p>
-            <p class="funding-text">Dec 2018 – Dec 2021</p>
+                <div class="funding-card">
+                    <p class="funding-title">National Key Research and Development Program of China</p>
+                    <p class="funding-text">Dec 2018 – Dec 2021</p>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
     </section>
 
     <!-- Footer Section -->
     <footer>
         <p>&copy; 2026 CHENJ-Lab</p>
     </footer>
+
+    <!-- Research Lightbox -->
+    <div id="research-lightbox" class="research-lightbox" aria-hidden="true">
+        <button id="research-lightbox-close" class="research-lightbox-close" aria-label="Close enlarged image">&times;</button>
+        <div class="research-lightbox-inner">
+            <img id="research-lightbox-img" class="research-lightbox-img" src="" alt="Enlarged research image">
+            <p id="research-lightbox-caption" class="research-lightbox-caption"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const researchButtons = document.querySelectorAll(".research-image-button");
+            const researchLightbox = document.getElementById("research-lightbox");
+            const researchLightboxImg = document.getElementById("research-lightbox-img");
+            const researchLightboxCaption = document.getElementById("research-lightbox-caption");
+            const researchLightboxClose = document.getElementById("research-lightbox-close");
+
+            function openResearchLightbox(imageSrc, imageTitle) {
+                researchLightboxImg.src = imageSrc;
+                researchLightboxImg.alt = imageTitle;
+                researchLightboxCaption.textContent = imageTitle;
+                researchLightbox.classList.add("open");
+                researchLightbox.setAttribute("aria-hidden", "false");
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeResearchLightbox() {
+                researchLightbox.classList.remove("open");
+                researchLightbox.setAttribute("aria-hidden", "true");
+                researchLightboxImg.src = "";
+                researchLightboxCaption.textContent = "";
+                document.body.style.overflow = "";
+            }
+
+            researchButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const fullImage = this.getAttribute("data-full");
+                    const imageTitle = this.getAttribute("data-title");
+                    openResearchLightbox(fullImage, imageTitle);
+                });
+            });
+
+            researchLightboxClose.addEventListener("click", closeResearchLightbox);
+
+            researchLightbox.addEventListener("click", function (e) {
+                if (e.target === researchLightbox) {
+                    closeResearchLightbox();
+                }
+            });
+
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape" && researchLightbox.classList.contains("open")) {
+                    closeResearchLightbox();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
