@@ -650,28 +650,29 @@ body.members-page .bio p {
 ========================= */
 .research-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 28px;
 }
 
 .research-image-card {
     background: var(--card-bg-soft);
     border-radius: var(--radius-md);
-    padding: 18px;
+    padding: 20px;
 }
 
 .research-image-card h3 {
-    margin: 0 0 14px 0;
-    font-size: 1.15rem;
+    margin: 0 0 16px 0;
+    font-size: 1.2rem;
     color: #222;
 }
 
 .research-image-card img {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
     border-radius: var(--radius-sm);
-    background: #dfe7f0;
+    background: #ffffff;
 }
 
 .funding-subsection-title {
