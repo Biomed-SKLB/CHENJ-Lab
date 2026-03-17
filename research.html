@@ -6,6 +6,36 @@
     <title>Research - CHENJ-Lab</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
+<div id="research-lightbox" class="research-lightbox">
+    <span id="research-lightbox-close" class="research-lightbox-close">&times;</span>
+    <img id="research-lightbox-img" class="research-lightbox-img" src="" alt="Enlarged image">
+</div>
+
+<script>
+    const researchImages = document.querySelectorAll(".research-clickable-image");
+    const researchLightbox = document.getElementById("research-lightbox");
+    const researchLightboxImg = document.getElementById("research-lightbox-img");
+    const researchLightboxClose = document.getElementById("research-lightbox-close");
+
+    researchImages.forEach(img => {
+        img.addEventListener("click", function () {
+            researchLightboxImg.src = this.src;
+            researchLightbox.style.display = "flex";
+        });
+    });
+
+    researchLightboxClose.addEventListener("click", function () {
+        researchLightbox.style.display = "none";
+    });
+
+    researchLightbox.addEventListener("click", function (e) {
+        if (e.target === researchLightbox) {
+            researchLightbox.style.display = "none";
+        }
+    });
+</script>
+    
 <body class="research-page">
 
     <!-- Navigation Bar -->
@@ -41,17 +71,17 @@
             <div class="research-grid">
                 <div class="research-image-card">
                     <h3>Organoid models for investigating limb development</h3>
-                    <img src="limborgan.png" alt="Organoid models for investigating limb development">
+                    <img src="limborgan.png" alt="Organoid models for investigating limb development" class="research-clickable-image">
                 </div>
 
                 <div class="research-image-card">
                     <h3>Zebrafish models for investigating huluwa gene regulation</h3>
-                    <img src="hwa.gif" alt="Zebrafish models for investigating huluwa gene regulation">
+                    <img src="hwa.gif" alt="Zebrafish models for investigating huluwa gene regulation" class="research-clickable-image">
                 </div>
 
                 <div class="research-image-card">
                     <h3>Epigenetics in zebrafish</h3>
-                    <img src="rd3.jpg" alt="Epigenetics in zebrafish">
+                    <img src="rd3.jpg" alt="Epigenetics in zebrafish" class="research-clickable-image">
                 </div>
 
             </div>
