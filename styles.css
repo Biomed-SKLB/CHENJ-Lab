@@ -1292,23 +1292,75 @@ body.members-page .team-member:not(#jing-chen-member) .bio p {
     margin-bottom: 22px;
 }
 
-/* Horizontal research card layout */
-.research-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
-    align-items: stretch;
+/* =========================
+   Research Page - refined
+   ========================= */
+
+/* 页面整体：恢复成更白一点、和其他页更统一的感觉 */
+.research-page-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 56px 20px 80px;
 }
 
+/* 页头文字：改白色 */
+.research-page-title {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.research-page-intro {
+    max-width: 760px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+/* 外层大块：恢复白一点的半透明背景，和别页统一 */
+.research-section-block {
+    background: rgba(255, 255, 255, 0.58);
+    border-radius: 24px;
+    padding: 30px 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 10px 26px rgba(30, 41, 59, 0.05);
+}
+
+/* section 标题保持深色，放在浅底里更清楚 */
+.section-title {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 22px;
+}
+
+/* 重点：3张不要硬塞一排，改成 2 + 1 */
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    align-items: start;
+}
+
+/* 第三张单独居中放下面 */
+.research-image-card--single {
+    grid-column: 1 / -1;
+    max-width: 720px;
+    width: 100%;
+    justify-self: center;
+}
+
+/* 卡片 */
 .research-image-card {
     background: rgba(255, 255, 255, 0.94);
-    border: 1px solid rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.72);
     border-radius: 20px;
     padding: 18px;
     box-shadow: 0 10px 26px rgba(30, 41, 59, 0.08);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
-    display: flex;
-    flex-direction: column;
 }
 
 .research-image-card:hover {
@@ -1321,29 +1373,31 @@ body.members-page .team-member:not(#jing-chen-member) .bio p {
     line-height: 1.5;
     color: #1f2937;
     margin: 0 0 14px;
-    min-height: 3.2em;
 }
 
-/* Button wrapper for clickable image */
+/* 缩略图容器：固定比例，真正裁切在这里发生 */
 .research-image-button {
-    border: none;
-    background: transparent;
-    padding: 0;
-    margin: 0;
+    position: relative;
+    display: block;
     width: 100%;
+    aspect-ratio: 4 / 3;
+    border: none;
+    background: #eef2f7;
+    padding: 0;
     cursor: zoom-in;
     border-radius: 14px;
     overflow: hidden;
-    display: block;
 }
 
+/* 图片：缩略图阶段统一裁切 */
 .research-clickable-image {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 100%;
     object-fit: cover;
+    object-position: center center;
     display: block;
-    border-radius: 14px;
-    background: #eef2f7;
     transition: transform 0.35s ease;
 }
 
@@ -1351,12 +1405,17 @@ body.members-page .team-member:not(#jing-chen-member) .bio p {
     transform: scale(1.03);
 }
 
-/* Funding block stays calmer */
+/* 第三张图：只在缩略图里适当裁切，偏上取景 */
+.research-clickable-image--epigenetics {
+    object-position: center 18%;
+}
+
+/* Funding 保持原样，顺一点就行 */
 .funding-block {
     margin-top: 8px;
 }
 
-/* Lightbox */
+/* Lightbox：大图完整显示，不裁切 */
 .research-lightbox {
     position: fixed;
     inset: 0;
@@ -1374,14 +1433,14 @@ body.members-page .team-member:not(#jing-chen-member) .bio p {
 
 .research-lightbox-inner {
     position: relative;
-    max-width: 1100px;
+    max-width: 1120px;
     width: 100%;
     text-align: center;
 }
 
 .research-lightbox-img {
     width: 100%;
-    max-height: 82vh;
+    max-height: 84vh;
     object-fit: contain;
     display: block;
     border-radius: 16px;
@@ -1413,10 +1472,15 @@ body.members-page .team-member:not(#jing-chen-member) .bio p {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
 }
 
-/* Responsive */
-@media (max-width: 1100px) {
+/* 响应式 */
+@media (max-width: 900px) {
     .research-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
+    }
+
+    .research-image-card--single {
+        grid-column: auto;
+        max-width: none;
     }
 }
 
@@ -1430,11 +1494,6 @@ body.members-page .team-member:not(#jing-chen-member) .bio p {
         border-radius: 18px;
     }
 
-    .research-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-
     .research-page-title {
         font-size: 2rem;
     }
@@ -1444,7 +1503,6 @@ body.members-page .team-member:not(#jing-chen-member) .bio p {
     }
 
     .research-image-card h3 {
-        min-height: auto;
         font-size: 1rem;
     }
 
