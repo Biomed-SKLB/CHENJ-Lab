@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://biomed-sklb.github.io/CHENJ-Lab/sitemap.xml

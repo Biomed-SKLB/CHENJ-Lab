@@ -14,3 +14,20 @@ I have always thought of this place as my home. To whoever joins CHENJ-Lab in th
 
 With gratitude and best wishes,  
 **Mingpeng Li**
+
+## Website administration
+
+The existing HTML remains the public, search-indexable baseline. Administrator
+changes are stored as Supabase overrides, so the original member profiles and
+news entries stay intact in Git history.
+
+1. Create a Supabase project and run `supabase/schema.sql` in its SQL Editor.
+2. Create the administrator in Authentication > Users.
+3. Run the final commented `insert into public.site_admins ...` statement in
+   `supabase/schema.sql` with the administrator's email.
+4. Add the Project URL and Publishable key to `site-config.js`.
+5. Open `admin.html` and sign in to manage members and announcements.
+
+The GitHub Pages workflow publishes the static site after changes reach `main`.
+The administrator page is excluded from search indexing, and Supabase Row Level
+Security limits all content writes to users listed in `site_admins`.
