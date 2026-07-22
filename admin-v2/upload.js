@@ -10,15 +10,17 @@ export function validateImage(file) {
 export async function uploadImage(client, userId, bucket, file, folder) {
     validateImage(file);
     if (!file) return null;
-    const path = `${userId}/${folder}-${Date.now()}-${crypto.randomUUID()}-${file.name}`;
+    const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
+    const safeFolder = String(folder || "image").replace(/[^a-z0-9-]/gi, "-");
+    const path = `${userId}/${safeFolder}-${Date.now()}-${crypto.randomUUID()}.${extension}`;
     const { error } = await client.storage.from(bucket).upload(path, file, { contentType: file.type });
     if (error) throw error;
     return client.storage.from(bucket).getPublicUrl(path).data.publicUrl;
 }
 
-export async function removeManagedImage(client, bucket, url, supabaseUrl) {
-    if (!url?.startsWith(`${supabaseUrl}/storage/v1/object/public/${bucket}/`)) return false;
-    const path = decodeURIComponent(url.split(`/public/${bucket}/`)[1]);
+export async function removeManagedImage(client, bucket, urlValue, supabaseUrl) {
+    if (!urlValue?.startsWith(`${supabaseUrl}/storage/v1/object/public/${bucket}/`)) return false;
+    const path = decodeURIComponent(urlValue.split(`/public/${bucket}/`)[1]);
     const { error } = await client.storage.from(bucket).remove([path]);
     if (error) throw error;
     return true;
