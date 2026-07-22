@@ -1,15 +1,204 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex,nofollow"><title>CHENJ-Lab Admin v2</title><link rel="stylesheet" href="../admin.css"></head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>网站管理 v2 预览 - CHENJ-Lab</title>
+    <link rel="stylesheet" href="../admin.css">
+</head>
 <body>
-<header class="admin-header"><a class="brand" href="../index.html">CHENJ-Lab</a><div><span id="admin-identity" hidden></span><button id="sign-out" class="button button-secondary" hidden>退出</button></div></header>
-<main class="admin-shell">
-<section id="setup-panel" hidden><h1>配置错误</h1></section>
-<section id="login-panel" hidden><h1>管理员登录</h1><form id="login-form"><input id="login-email" type="email" required><input id="login-password" type="password" required><button>登录</button><p id="login-error"></p></form></section>
-<section id="admin-panel" hidden><h1>网站管理 v2</h1><button id="new-member" class="button button-primary">新增成员</button><button id="new-announcement" class="button button-primary">新建公告</button><div id="members-list"></div><div id="announcements-list"></div></section>
-</main>
-<dialog id="member-dialog"><form id="member-form"><input id="member-id" type="hidden"><input id="member-base-key" type="hidden"><input id="member-old-image-url" type="hidden"><h2 id="member-dialog-title">成员</h2><input id="member-name" required><input id="member-position"><input id="member-research"><textarea id="member-bio"></textarea><input id="member-image-url"><input id="member-image-file" type="file"><input id="member-category" value="Current Members"><input id="member-sort-order" type="number"><input id="member-visible" type="checkbox" checked><button id="delete-member" type="button">删除</button><button id="restore-member" type="button">恢复</button><button>保存</button></form></dialog>
-<dialog id="announcement-dialog"><form id="announcement-form"><input id="announcement-id" type="hidden"><input id="announcement-old-image-url" type="hidden"><h2 id="announcement-dialog-title">公告</h2><input id="announcement-title" required><textarea id="announcement-summary"></textarea><textarea id="announcement-body"></textarea><input id="announcement-published-at" type="datetime-local"><select id="announcement-status"><option value="draft">草稿</option><option value="published">发布</option></select><input id="announcement-image-url"><input id="announcement-image-file" type="file"><button id="delete-announcement" type="button">删除</button><button>保存</button></form></dialog>
-<div id="toast" hidden></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../site-config.js"></script><script type="module" src="./app.js"></script>
-</body></html>
+    <header class="admin-header">
+        <a class="brand" href="../index.html">CHENJ-Lab</a>
+        <div class="admin-header-actions">
+            <span id="admin-identity" class="admin-identity" hidden></span>
+            <button id="sign-out" class="button button-secondary" type="button" hidden>退出登录</button>
+        </div>
+    </header>
+
+    <main class="admin-shell">
+        <section id="setup-panel" class="admin-card setup-card" hidden>
+            <p class="eyebrow">ADMIN V2 PREVIEW</p>
+            <h1>连接内容数据库</h1>
+            <p>请检查 <code>site-config.js</code> 中的 Supabase Project URL 和 Publishable key，并确认已运行 <code>supabase/schema.sql</code>。</p>
+        </section>
+
+        <section id="login-panel" class="admin-card login-card" hidden>
+            <p class="eyebrow">ADMIN V2 PREVIEW</p>
+            <h1>管理员登录</h1>
+            <p class="muted">这是独立的模块化后台预览，不会替换当前正式后台。</p>
+            <form id="login-form" class="stack-form">
+                <label>
+                    邮箱
+                    <input id="login-email" name="email" type="email" autocomplete="email" required>
+                </label>
+                <label>
+                    密码
+                    <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+                </label>
+                <button class="button button-primary" type="submit">登录</button>
+                <p id="login-error" class="form-error" role="alert"></p>
+            </form>
+        </section>
+
+        <section id="admin-panel" hidden>
+            <div class="admin-title-row">
+                <div>
+                    <p class="eyebrow">CMS V2 PREVIEW</p>
+                    <h1>网站管理 v2</h1>
+                    <p class="muted">静态成员资料保留在仓库中；此后台只保存管理员确认后的差异与新增内容。</p>
+                </div>
+            </div>
+
+            <nav class="admin-tabs" aria-label="管理栏目">
+                <button class="tab-button is-active" data-tab="members" type="button">成员信息</button>
+                <button class="tab-button" data-tab="announcements" type="button">公告发布</button>
+            </nav>
+
+            <section id="members-tab" class="tab-panel">
+                <div class="panel-toolbar">
+                    <div>
+                        <h2>成员信息</h2>
+                        <p class="muted">选择成员即可编辑。恢复操作会移除数据库覆盖记录并回到 <code>members.html</code> 中的原始资料。</p>
+                    </div>
+                    <button id="new-member" class="button button-primary" type="button">新增成员</button>
+                </div>
+                <div id="members-list" class="content-list" aria-live="polite"></div>
+            </section>
+
+            <section id="announcements-tab" class="tab-panel" hidden>
+                <div class="panel-toolbar">
+                    <div>
+                        <h2>公告</h2>
+                        <p class="muted">草稿不会显示在公开网站；发布后的公告由现有公开页面读取。</p>
+                    </div>
+                    <button id="new-announcement" class="button button-primary" type="button">新建公告</button>
+                </div>
+                <div id="announcements-list" class="content-list" aria-live="polite"></div>
+            </section>
+        </section>
+    </main>
+
+    <dialog id="member-dialog" class="editor-dialog">
+        <form id="member-form" class="editor-form">
+            <div class="dialog-heading">
+                <div>
+                    <p class="eyebrow">MEMBER</p>
+                    <h2 id="member-dialog-title">编辑成员</h2>
+                </div>
+                <button class="icon-button" data-close-dialog="member-dialog" type="button" aria-label="关闭">×</button>
+            </div>
+            <input id="member-id" type="hidden">
+            <input id="member-base-key" type="hidden">
+            <input id="member-old-image-url" type="hidden">
+            <div class="form-grid">
+                <label class="span-two">
+                    姓名（建议保持“中文名|English name”格式）
+                    <input id="member-name" required>
+                </label>
+                <label>
+                    职位
+                    <input id="member-position">
+                </label>
+                <label>
+                    分组
+                    <select id="member-category">
+                        <option>Current Members</option>
+                        <option>Former Members</option>
+                    </select>
+                </label>
+                <label class="span-two">
+                    研究方向
+                    <input id="member-research">
+                </label>
+                <label class="span-two">
+                    个人简介
+                    <textarea id="member-bio" rows="5"></textarea>
+                </label>
+                <label>
+                    图片地址
+                    <input id="member-image-url" placeholder="现有图片文件名或 https://...">
+                </label>
+                <label>
+                    或上传图片
+                    <input id="member-image-file" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+                </label>
+                <label>
+                    排序
+                    <input id="member-sort-order" type="number" min="0" step="1" value="100">
+                </label>
+                <label class="checkbox-label">
+                    <input id="member-visible" type="checkbox" checked>
+                    公开显示
+                </label>
+            </div>
+            <div class="dialog-actions split-actions">
+                <button id="delete-member" class="button button-danger" type="button" hidden>删除新增成员</button>
+                <button id="restore-member" class="button button-danger" type="button" hidden>恢复原始资料</button>
+                <span></span>
+                <button class="button button-secondary" data-close-dialog="member-dialog" type="button">取消</button>
+                <button class="button button-primary" type="submit">保存成员信息</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="announcement-dialog" class="editor-dialog">
+        <form id="announcement-form" class="editor-form">
+            <div class="dialog-heading">
+                <div>
+                    <p class="eyebrow">ANNOUNCEMENT</p>
+                    <h2 id="announcement-dialog-title">新建公告</h2>
+                </div>
+                <button class="icon-button" data-close-dialog="announcement-dialog" type="button" aria-label="关闭">×</button>
+            </div>
+            <input id="announcement-id" type="hidden">
+            <input id="announcement-old-image-url" type="hidden">
+            <div class="form-grid">
+                <label class="span-two">
+                    标题
+                    <input id="announcement-title" required>
+                </label>
+                <label class="span-two">
+                    摘要
+                    <textarea id="announcement-summary" rows="3"></textarea>
+                </label>
+                <label class="span-two">
+                    正文
+                    <textarea id="announcement-body" rows="7"></textarea>
+                </label>
+                <label>
+                    发布时间
+                    <input id="announcement-published-at" type="datetime-local" required>
+                </label>
+                <label>
+                    状态
+                    <select id="announcement-status">
+                        <option value="draft">草稿</option>
+                        <option value="published">发布</option>
+                    </select>
+                </label>
+                <label>
+                    图片地址
+                    <input id="announcement-image-url" type="url" placeholder="https://...">
+                </label>
+                <label>
+                    或上传图片
+                    <input id="announcement-image-file" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+                </label>
+            </div>
+            <div class="dialog-actions split-actions">
+                <button id="delete-announcement" class="button button-danger" type="button" hidden>删除公告</button>
+                <span></span>
+                <button class="button button-secondary" data-close-dialog="announcement-dialog" type="button">取消</button>
+                <button class="button button-primary" type="submit">保存公告</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../site-config.js"></script>
+    <script type="module" src="./app.js"></script>
+</body>
+</html>
