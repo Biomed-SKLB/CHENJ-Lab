@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>网站管理 v2 - CHENJ-Lab</title>
+    <link rel="stylesheet" href="../admin.css">
+</head>
+<body>
+    <header class="admin-header">
+        <a class="brand" href="../index.html">CHENJ-Lab</a>
+        <div class="admin-header-actions">
+            <span id="admin-identity" class="admin-identity" hidden></span>
+            <button id="sign-out" class="button button-secondary" type="button" hidden>退出登录</button>
+        </div>
+    </header>
+
+    <main class="admin-shell">
+        <section id="setup-panel" class="admin-card setup-card" hidden>
+            <p class="eyebrow">ADMIN V2</p>
+            <h1>配置尚未完成</h1>
+            <p>请检查 <code>site-config.js</code> 中的 Supabase 配置。</p>
+        </section>
+
+        <section id="login-panel" class="admin-card login-card" hidden>
+            <p class="eyebrow">ADMIN V2</p>
+            <h1>管理员登录</h1>
+            <p class="muted">这是模块化后台的独立预览入口，不会替换当前后台。</p>
+            <form id="login-form" class="stack-form">
+                <label>
+                    邮箱
+                    <input id="login-email" name="email" type="email" autocomplete="email" required>
+                </label>
+                <label>
+                    密码
+                    <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+                </label>
+                <button class="button button-primary" type="submit">登录</button>
+                <p id="login-error" class="form-error" role="alert"></p>
+            </form>
+        </section>
+
+        <section id="admin-panel" hidden>
+            <div class="admin-title-row">
+                <div>
+                    <p class="eyebrow">MODULAR FOUNDATION</p>
+                    <h1>网站管理 v2</h1>
+                    <p class="muted">第一阶段提供认证、数据读取与列表预览；写入功能将在后续独立变更中接入。</p>
+                </div>
+            </div>
+
+            <nav class="admin-tabs" aria-label="管理栏目">
+                <button class="tab-button is-active" data-tab="members" type="button">成员信息</button>
+                <button class="tab-button" data-tab="announcements" type="button">公告</button>
+            </nav>
+
+            <section id="members-tab" class="tab-panel">
+                <div class="panel-toolbar">
+                    <div>
+                        <h2>成员信息</h2>
+                        <p class="muted">合并静态成员资料与 Supabase 覆盖记录后的预览。</p>
+                    </div>
+                </div>
+                <div id="members-list" class="content-list" aria-live="polite"></div>
+            </section>
+
+            <section id="announcements-tab" class="tab-panel" hidden>
+                <div class="panel-toolbar">
+                    <div>
+                        <h2>公告</h2>
+                        <p class="muted">管理员可查看草稿与已发布公告。</p>
+                    </div>
+                </div>
+                <div id="announcements-list" class="content-list" aria-live="polite"></div>
+            </section>
+        </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../site-config.js"></script>
+    <script type="module" src="./app.js"></script>
+</body>
+</html>
