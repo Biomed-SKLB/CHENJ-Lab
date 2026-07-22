@@ -1,0 +1,46 @@
+name: Admin v2 preview package
+
+on:
+  pull_request:
+    paths:
+      - "admin-v2/**"
+      - "scripts/check-admin-v2.mjs"
+      - ".github/workflows/admin-v2-preview.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Syntax check
+        run: find admin-v2 -name '*.js' -print0 | xargs -0 -n1 node --check
+
+      - name: Contract checks
+        run: node scripts/check-admin-v2.mjs
+
+      - name: Start preview server
+        run: |
+          python3 -m http.server 8080 > /tmp/admin-v2-server.log 2>&1 &
+          sleep 3
+          curl --fail http://127.0.0.1:8080/admin-v2/index.html
+
+      - name: Create preview artifact
+        run: |
+          mkdir -p preview/admin-v2
+          cp -r admin-v2 preview/
+          cp admin.css site-config.js preview/ 2>/dev/null || true
+          cd preview
+          zip -r ../admin-v2-preview.zip admin-v2
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: admin-v2-preview
+          path: admin-v2-preview.zip
