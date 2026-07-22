@@ -10,8 +10,13 @@ const config = window.CHENJ_LAB_CONFIG || {};
 const state = {};
 
 async function refresh() {
-    state.members = mergeMembers(await loadBaseMembers(), await state.db.members.listOverrides());
-    state.announcements = (await state.db.announcements.list()).map(normalizeAnnouncement);
+    const [baseMembers, overrides, announcements] = await Promise.all([
+        loadBaseMembers(),
+        state.db.members.listOverrides(),
+        state.db.announcements.list()
+    ]);
+    state.members = mergeMembers(baseMembers, overrides);
+    state.announcements = announcements.map(normalizeAnnouncement);
     renderMembers();
     renderAnnouncements();
 }
@@ -20,8 +25,12 @@ function renderMembers() {
     const box = byId("members-list");
     if (!state.members.length) return renderEmptyState(box, "暂无成员");
     box.replaceChildren(...state.members.map((item) => createContentRow({
-        title: item.name,
-        meta: item.position || "",
+        title: item.name || "未命名成员",
+        meta: `${item.category || "未分组"} · ${item.position || "未填写职位"}`,
+        status: {
+            active: item.is_visible !== false,
+            label: item.is_visible === false ? "已隐藏" : "公开"
+        },
         onAction: () => state.memberEditor.open(item)
     })));
 }
@@ -32,6 +41,10 @@ function renderAnnouncements() {
     box.replaceChildren(...state.announcements.map((item) => createContentRow({
         title: item.title,
         meta: item.publishedLabel,
+        status: {
+            active: item.status === "published",
+            label: item.status === "published" ? "已发布" : "草稿"
+        },
         onAction: () => state.announcementEditor.open(item)
     })));
 }
@@ -41,22 +54,42 @@ function bindLogin() {
         event.preventDefault();
         setBusy(event.currentTarget, true);
         try {
-            await signIn(state.client, byId("login-email").value, byId("login-password").value);
+            await signIn(state.client, byId("login-email").value.trim(), byId("login-password").value);
             location.reload();
         } catch (error) {
-            byId("login-error").textContent = error.message;
+            byId("login-error").textContent = error.message || "登录失败。";
         } finally {
             setBusy(event.currentTarget, false);
         }
     });
 }
 
+function bindStaticUi() {
+    document.querySelectorAll("[data-close-dialog]").forEach((button) => {
+        button.addEventListener("click", () => byId(button.dataset.closeDialog).close());
+    });
+    document.querySelectorAll(".tab-button").forEach((button) => {
+        button.addEventListener("click", () => {
+            document.querySelectorAll(".tab-button").forEach((item) => item.classList.toggle("is-active", item === button));
+            byId("members-tab").hidden = button.dataset.tab !== "members";
+            byId("announcements-tab").hidden = button.dataset.tab !== "announcements";
+        });
+    });
+}
+
 async function init() {
+    bindStaticUi();
     bindLogin();
-    if (!isConfigured(config)) return (byId("setup-panel").hidden = false);
+    if (!isConfigured(config)) {
+        byId("setup-panel").hidden = false;
+        return;
+    }
     state.client = window.supabase.createClient(config.supabaseUrl, config.supabasePublishableKey);
     const user = await getSession(state.client);
-    if (!user) return (byId("login-panel").hidden = false);
+    if (!user) {
+        byId("login-panel").hidden = false;
+        return;
+    }
     await verifyAdmin(state.client, user);
     state.user = user;
     state.db = createDatabase(state.client);
@@ -72,4 +105,4 @@ async function init() {
     await refresh();
 }
 
-init().catch((error) => showToast(error.message, true));
+init().catch((error) => showToast(error.message || "初始化失败。", true));
