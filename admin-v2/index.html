@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex, nofollow"><title>网站管理 v2 - CHENJ-Lab</title><link rel="stylesheet" href="../admin.css">
-</head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex,nofollow"><title>CHENJ-Lab Admin v2</title><link rel="stylesheet" href="../admin.css"></head>
 <body>
-<header class="admin-header"><a class="brand" href="../index.html">CHENJ-Lab</a><div class="admin-header-actions"><span id="admin-identity" hidden></span><button id="sign-out" class="button button-secondary" type="button" hidden>退出登录</button></div></header>
+<header class="admin-header"><a class="brand" href="../index.html">CHENJ-Lab</a><div><span id="admin-identity" hidden></span><button id="sign-out" class="button button-secondary" hidden>退出</button></div></header>
 <main class="admin-shell">
-<section id="login-panel" class="admin-card" hidden><h1>管理员登录</h1><form id="login-form"><label>邮箱<input id="login-email" type="email" required></label><label>密码<input id="login-password" type="password" required></label><button class="button button-primary">登录</button></form></section>
-<section id="admin-panel" hidden><h1>网站管理 v2</h1><nav><button data-tab="members">成员信息</button><button data-tab="announcements">公告</button></nav>
-<section id="members-tab"><button id="new-member" class="button button-primary">新增成员</button><div id="members-list"></div></section>
-<section id="announcements-tab" hidden><button id="new-announcement" class="button button-primary">发布公告</button><div id="announcements-list"></div></section>
-</section></main>
-<dialog id="member-dialog"><form id="member-form"><input id="member-id" type="hidden"><input id="member-base-key" type="hidden"><input id="member-name" placeholder="姓名" required><input id="member-position" placeholder="职位"><input id="member-research" placeholder="研究方向"><textarea id="member-bio"></textarea><input id="member-image-url" placeholder="图片地址"><input id="member-image-file" type="file"><input id="member-category" value="Current Members"><input id="member-sort-order" type="number"><input id="member-visible" type="checkbox" checked><button>保存</button></form></dialog>
-<dialog id="announcement-dialog"><form id="announcement-form"><input id="announcement-id" type="hidden"><input id="announcement-title" placeholder="标题" required><textarea id="announcement-summary"></textarea><textarea id="announcement-body"></textarea><input id="announcement-published-at" type="datetime-local"><select id="announcement-status"><option value="draft">草稿</option><option value="published">发布</option></select><input id="announcement-image-url"><input id="announcement-image-file" type="file"><button>保存</button></form></dialog>
-<div id="toast" hidden></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../site-config.js"></script><script type="module" src="./app.js"></script>
+<section id="setup-panel" hidden><h1>配置错误</h1></section>
+<section id="login-panel" hidden><h1>管理员登录</h1><form id="login-form"><input id="login-email" type="email" required><input id="login-password" type="password" required><button>登录</button><p id="login-error"></p></form></section>
+<section id="admin-panel" hidden><h1>网站管理 v2</h1><button id="new-member" class="button button-primary">新增成员</button><button id="new-announcement" class="button button-primary">新建公告</button><div id="members-list"></div><div id="announcements-list"></div></section>
+</main>
+<dialog id="member-dialog"><form id="member-form"><input id="member-id" type="hidden"><input id="member-base-key" type="hidden"><input id="member-old-image-url" type="hidden"><h2 id="member-dialog-title">成员</h2><input id="member-name" required><input id="member-position"><input id="member-research"><textarea id="member-bio"></textarea><input id="member-image-url"><input id="member-image-file" type="file"><input id="member-category" value="Current Members"><input id="member-sort-order" type="number"><input id="member-visible" type="checkbox" checked><button id="delete-member" type="button">删除</button><button id="restore-member" type="button">恢复</button><button>保存</button></form></dialog>
+<dialog id="announcement-dialog"><form id="announcement-form"><input id="announcement-id" type="hidden"><input id="announcement-old-image-url" type="hidden"><h2 id="announcement-dialog-title">公告</h2><input id="announcement-title" required><textarea id="announcement-summary"></textarea><textarea id="announcement-body"></textarea><input id="announcement-published-at" type="datetime-local"><select id="announcement-status"><option value="draft">草稿</option><option value="published">发布</option></select><input id="announcement-image-url"><input id="announcement-image-file" type="file"><button id="delete-announcement" type="button">删除</button><button>保存</button></form></dialog>
+<div id="toast" hidden></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../site-config.js"></script><script type="module" src="./app.js"></script>
 </body></html>
