@@ -1,18 +1,24 @@
 export function normalizeAnnouncement(item) {
     return {
         ...item,
-        publishedLabel: new Date(item.published_at).toLocaleDateString("zh-CN")
+        publishedLabel: item.published_at
+            ? new Date(item.published_at).toLocaleDateString("zh-CN")
+            : "未发布"
     };
 }
 
-export function announcementPayload(form, userId) {
+export function announcementPayload(values, userId) {
+    const date = new Date(values.published_at);
+    if (Number.isNaN(date.getTime())) throw new Error("请填写有效的发布时间。");
+
     return {
-        title: form.title.trim(),
-        summary: form.summary.trim() || null,
-        body: form.body.trim() || null,
-        image_url: form.image_url.trim() || null,
-        published_at: form.published_at,
-        status: form.status,
+        ...(values.id ? { id: values.id } : {}),
+        title: values.title.trim(),
+        summary: values.summary.trim() || null,
+        body: values.body.trim() || null,
+        image_url: values.image_url.trim() || null,
+        published_at: date.toISOString(),
+        status: values.status,
         created_by: userId
     };
 }
