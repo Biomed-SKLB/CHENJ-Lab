@@ -1,62 +1,75 @@
-import { byId, showToast, createContentRow, renderEmptyState } from "./utils.js";
-import { verifyAdmin, getSession, signIn, signOut } from "./auth.js";
+import { byId, createContentRow, renderEmptyState, setBusy, showToast } from "./utils.js";
+import { getSession, isConfigured, signIn, signOut, verifyAdmin } from "./auth.js";
 import { createDatabase } from "./database.js";
 import { loadBaseMembers, mergeMembers } from "./members.js";
 import { normalizeAnnouncement } from "./announcements.js";
+import { createMemberEditor } from "./member-editor.js";
+import { createAnnouncementEditor } from "./announcement-editor.js";
 
 const config = window.CHENJ_LAB_CONFIG || {};
-let state = {};
+const state = {};
 
-async function init() {
-    const client = window.supabase.createClient(config.supabaseUrl, config.supabasePublishableKey);
-    state.client = client;
-    const user = await getSession(client);
-    if (!user) {
-        byId("login-panel").hidden = false;
-        byId("login-form").addEventListener("submit", async (event) => {
-            event.preventDefault();
-            try {
-                await signIn(client, byId("login-email").value, byId("login-password").value);
-                location.reload();
-            } catch (error) { showToast(error.message, true); }
-        });
-        return;
-    }
-
-    await verifyAdmin(client, user);
-    state.user = user;
-    state.db = createDatabase(client);
+async function refresh() {
     state.members = mergeMembers(await loadBaseMembers(), await state.db.members.listOverrides());
     state.announcements = (await state.db.announcements.list()).map(normalizeAnnouncement);
+    renderMembers();
+    renderAnnouncements();
+}
 
+function renderMembers() {
+    const box = byId("members-list");
+    if (!state.members.length) return renderEmptyState(box, "暂无成员");
+    box.replaceChildren(...state.members.map((item) => createContentRow({
+        title: item.name,
+        meta: item.position || "",
+        onAction: () => state.memberEditor.open(item)
+    })));
+}
+
+function renderAnnouncements() {
+    const box = byId("announcements-list");
+    if (!state.announcements.length) return renderEmptyState(box, "暂无公告");
+    box.replaceChildren(...state.announcements.map((item) => createContentRow({
+        title: item.title,
+        meta: item.publishedLabel,
+        onAction: () => state.announcementEditor.open(item)
+    })));
+}
+
+function bindLogin() {
+    byId("login-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        setBusy(event.currentTarget, true);
+        try {
+            await signIn(state.client, byId("login-email").value, byId("login-password").value);
+            location.reload();
+        } catch (error) {
+            byId("login-error").textContent = error.message;
+        } finally {
+            setBusy(event.currentTarget, false);
+        }
+    });
+}
+
+async function init() {
+    bindLogin();
+    if (!isConfigured(config)) return (byId("setup-panel").hidden = false);
+    state.client = window.supabase.createClient(config.supabaseUrl, config.supabasePublishableKey);
+    const user = await getSession(state.client);
+    if (!user) return (byId("login-panel").hidden = false);
+    await verifyAdmin(state.client, user);
+    state.user = user;
+    state.db = createDatabase(state.client);
+    state.memberEditor = createMemberEditor({ client: state.client, db: state.db, config, user, onChanged: refresh });
+    state.announcementEditor = createAnnouncementEditor({ client: state.client, db: state.db, config, user, onChanged: refresh });
     byId("admin-panel").hidden = false;
     byId("admin-identity").hidden = false;
     byId("admin-identity").textContent = user.email;
     byId("sign-out").hidden = false;
-    byId("sign-out").onclick = async () => { await signOut(client); location.reload(); };
-
-    renderMembers(state.members);
-    renderAnnouncements(state.announcements);
-}
-
-function renderMembers(items) {
-    const box = byId("members-list");
-    if (!items.length) return renderEmptyState(box, "暂无成员记录");
-    box.replaceChildren(...items.map((item) => createContentRow({
-        title: item.name || "未命名成员",
-        meta: item.position || "",
-        onAction: () => showToast("成员编辑器接口已准备")
-    })));
-}
-
-function renderAnnouncements(items) {
-    const box = byId("announcements-list");
-    if (!items.length) return renderEmptyState(box, "暂无公告");
-    box.replaceChildren(...items.map((item) => createContentRow({
-        title: item.title,
-        meta: item.publishedLabel || "",
-        onAction: () => showToast("公告编辑器接口已准备")
-    })));
+    byId("sign-out").onclick = async () => { await signOut(state.client); location.reload(); };
+    byId("new-member").onclick = () => state.memberEditor.open();
+    byId("new-announcement").onclick = () => state.announcementEditor.open();
+    await refresh();
 }
 
 init().catch((error) => showToast(error.message, true));
