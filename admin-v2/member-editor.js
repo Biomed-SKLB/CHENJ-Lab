@@ -2,13 +2,30 @@ import { byId, setBusy, showToast } from "./utils.js";
 import { memberKey, memberPayload } from "./members.js";
 import { uploadImage, removeManagedImage } from "./upload.js";
 
+function hasMeaningfulOverride(payload) {
+    if (!payload.base_member_key) return true;
+    if (payload.is_visible === false) return true;
+    return [
+        payload.name,
+        payload.position,
+        payload.research,
+        payload.bio,
+        payload.image_url,
+        payload.category,
+        payload.sort_order
+    ].some((value) => value !== null);
+}
+
 export function createMemberEditor({ client, db, config, user, onChanged }) {
     const dialog = byId("member-dialog");
     const form = byId("member-form");
     const deleteButton = byId("delete-member");
     const restoreButton = byId("restore-member");
+    const bucket = config.mediaBucket || "chenj-lab-media";
+    let currentMember = null;
 
     function open(member = null) {
+        currentMember = member;
         form.reset();
         byId("member-dialog-title").textContent = member ? "编辑成员" : "新增成员";
         byId("member-id").value = member?.id || "";
@@ -38,11 +55,11 @@ export function createMemberEditor({ client, db, config, user, onChanged }) {
             uploadedUrl = await uploadImage(
                 client,
                 user.id,
-                config.mediaBucket || "chenj-lab-media",
+                bucket,
                 file,
                 byId("member-base-key").value || memberKey(name) || "member"
             );
-
+            const finalImageUrl = uploadedUrl || byId("member-image-url").value.trim();
             const payload = memberPayload({
                 id: byId("member-id").value || null,
                 base_member_key: byId("member-base-key").value || null,
@@ -50,24 +67,20 @@ export function createMemberEditor({ client, db, config, user, onChanged }) {
                 position: byId("member-position").value,
                 research: byId("member-research").value,
                 bio: byId("member-bio").value,
-                image_url: uploadedUrl || byId("member-image-url").value,
+                image_url: finalImageUrl,
                 category: byId("member-category").value,
                 sort_order: byId("member-sort-order").value,
                 is_visible: byId("member-visible").checked
-            });
+            }, currentMember?.baseline || null);
 
-            await db.members.save(payload);
-            if (uploadedUrl && oldImageUrl && oldImageUrl !== uploadedUrl) {
-                try {
-                    await removeManagedImage(
-                        client,
-                        config.mediaBucket || "chenj-lab-media",
-                        oldImageUrl,
-                        config.supabaseUrl
-                    );
-                } catch (cleanupError) {
-                    console.warn("Unable to remove replaced member image", cleanupError);
-                }
+            if (payload.base_member_key && !hasMeaningfulOverride(payload)) {
+                if (payload.id) await db.members.remove(payload.id);
+            } else {
+                await db.members.save(payload);
+            }
+
+            if (oldImageUrl && oldImageUrl !== finalImageUrl) {
+                await removeManagedImage(client, bucket, oldImageUrl, config.supabaseUrl).catch(() => {});
             }
 
             dialog.close();
@@ -75,16 +88,7 @@ export function createMemberEditor({ client, db, config, user, onChanged }) {
             showToast("成员信息已保存。");
         } catch (error) {
             if (uploadedUrl) {
-                try {
-                    await removeManagedImage(
-                        client,
-                        config.mediaBucket || "chenj-lab-media",
-                        uploadedUrl,
-                        config.supabaseUrl
-                    );
-                } catch (cleanupError) {
-                    console.warn("Unable to remove failed member upload", cleanupError);
-                }
+                await removeManagedImage(client, bucket, uploadedUrl, config.supabaseUrl).catch(() => {});
             }
             showToast(error.message || "保存成员失败。", true);
         } finally {
@@ -100,11 +104,7 @@ export function createMemberEditor({ client, db, config, user, onChanged }) {
             const imageUrl = byId("member-old-image-url").value;
             await db.members.remove(id);
             if (imageUrl) {
-                try {
-                    await removeManagedImage(client, config.mediaBucket || "chenj-lab-media", imageUrl, config.supabaseUrl);
-                } catch (cleanupError) {
-                    console.warn("Unable to remove deleted member image", cleanupError);
-                }
+                await removeManagedImage(client, bucket, imageUrl, config.supabaseUrl).catch(() => {});
             }
             dialog.close();
             await onChanged();
@@ -122,13 +122,10 @@ export function createMemberEditor({ client, db, config, user, onChanged }) {
         setBusy(form, true);
         try {
             const currentImageUrl = byId("member-old-image-url").value;
+            const baselineImageUrl = currentMember?.baseline?.image_url || "";
             await db.members.remove(id);
-            if (currentImageUrl) {
-                try {
-                    await removeManagedImage(client, config.mediaBucket || "chenj-lab-media", currentImageUrl, config.supabaseUrl);
-                } catch (cleanupError) {
-                    console.warn("Unable to remove restored member image", cleanupError);
-                }
+            if (currentImageUrl && currentImageUrl !== baselineImageUrl) {
+                await removeManagedImage(client, bucket, currentImageUrl, config.supabaseUrl).catch(() => {});
             }
             dialog.close();
             await onChanged();
