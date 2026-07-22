@@ -46,17 +46,24 @@ export function mergeMembers(baseMembers, overrides) {
     );
 
     const baseline = baseMembers.map((member) => {
+        const baselineSnapshot = { ...member };
         const override = overridesByKey.get(member.base_member_key);
-        if (!override) return member;
+        if (!override) return { ...member, baseline: baselineSnapshot };
         const nonNullValues = Object.fromEntries(
             Object.entries(override).filter(([, value]) => value !== null)
         );
-        return { ...member, ...nonNullValues, id: override.id, is_baseline: true };
+        return {
+            ...member,
+            ...nonNullValues,
+            id: override.id,
+            is_baseline: true,
+            baseline: baselineSnapshot
+        };
     });
 
     const added = overrides
         .filter((item) => !item.base_member_key)
-        .map((item) => ({ ...item, is_baseline: false }));
+        .map((item) => ({ ...item, is_baseline: false, baseline: null }));
 
     return [...baseline, ...added].sort((a, b) => {
         if (a.category !== b.category) return a.category.localeCompare(b.category);
@@ -64,10 +71,12 @@ export function mergeMembers(baseMembers, overrides) {
     });
 }
 
-export function memberPayload(values) {
-    return {
-        ...(values.id ? { id: values.id } : {}),
-        base_member_key: values.base_member_key || null,
+function nullableOverride(value, baselineValue) {
+    return value === (baselineValue ?? "") ? null : value;
+}
+
+export function memberPayload(values, baseline = null) {
+    const current = {
         name: values.name.trim(),
         position: values.position.trim(),
         research: values.research.trim(),
@@ -76,5 +85,26 @@ export function memberPayload(values) {
         category: values.category,
         sort_order: Number(values.sort_order || 0),
         is_visible: Boolean(values.is_visible)
+    };
+
+    if (!baseline) {
+        return {
+            ...(values.id ? { id: values.id } : {}),
+            base_member_key: null,
+            ...current
+        };
+    }
+
+    return {
+        ...(values.id ? { id: values.id } : {}),
+        base_member_key: values.base_member_key,
+        name: nullableOverride(current.name, baseline.name),
+        position: nullableOverride(current.position, baseline.position),
+        research: nullableOverride(current.research, baseline.research),
+        bio: nullableOverride(current.bio, baseline.bio),
+        image_url: nullableOverride(current.image_url, baseline.image_url),
+        category: current.category === baseline.category ? null : current.category,
+        sort_order: current.sort_order === Number(baseline.sort_order || 0) ? null : current.sort_order,
+        is_visible: current.is_visible
     };
 }
