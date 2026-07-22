@@ -6,6 +6,7 @@ export function createAnnouncementEditor({ client, db, config, user, onChanged }
     const dialog = byId("announcement-dialog");
     const form = byId("announcement-form");
     const deleteButton = byId("delete-announcement");
+    const bucket = config.mediaBucket || "chenj-lab-media";
 
     function open(item = null) {
         form.reset();
@@ -16,9 +17,7 @@ export function createAnnouncementEditor({ client, db, config, user, onChanged }
         byId("announcement-summary").value = item?.summary || "";
         byId("announcement-body").value = item?.body || "";
         byId("announcement-image-url").value = item?.image_url || "";
-        byId("announcement-published-at").value = item?.published_at
-            ? localDateTimeValue(new Date(item.published_at))
-            : localDateTimeValue();
+        byId("announcement-published-at").value = item?.published_at ? localDateTimeValue(new Date(item.published_at)) : localDateTimeValue();
         byId("announcement-status").value = item?.status || "draft";
         deleteButton.hidden = !item?.id;
         dialog.showModal();
@@ -30,33 +29,26 @@ export function createAnnouncementEditor({ client, db, config, user, onChanged }
         let uploadedUrl = null;
         try {
             const oldImageUrl = byId("announcement-old-image-url").value;
-            uploadedUrl = await uploadImage(
-                client,
-                user.id,
-                config.mediaBucket || "chenj-lab-media",
-                byId("announcement-image-file").files[0],
-                "announcement"
-            );
-            await db.announcements.save(announcementPayload({
+            uploadedUrl = await uploadImage(client, user.id, bucket, byId("announcement-image-file").files[0], "announcement");
+            const finalImageUrl = uploadedUrl || byId("announcement-image-url").value.trim();
+            const payload = announcementPayload({
                 id: byId("announcement-id").value || null,
                 title: byId("announcement-title").value,
                 summary: byId("announcement-summary").value,
                 body: byId("announcement-body").value,
-                image_url: uploadedUrl || byId("announcement-image-url").value,
+                image_url: finalImageUrl,
                 published_at: byId("announcement-published-at").value,
                 status: byId("announcement-status").value
-            }, user.id));
-            if (uploadedUrl && oldImageUrl && oldImageUrl !== uploadedUrl) {
-                try {
-                    await removeManagedImage(client, config.mediaBucket || "chenj-lab-media", oldImageUrl, config.supabaseUrl);
-                } catch (cleanupError) {
-                    console.warn("Unable to remove replaced announcement image", cleanupError);
-                }
+            }, user.id);
+            await db.announcements.save(payload);
+            if (oldImageUrl && oldImageUrl !== finalImageUrl) {
+                await removeManagedImage(client, bucket, oldImageUrl, config.supabaseUrl).catch(() => {});
             }
             dialog.close();
             await onChanged();
             showToast("公告已保存。");
         } catch (error) {
+            if (uploadedUrl) await removeManagedImage(client, bucket, uploadedUrl, config.supabaseUrl).catch(() => {});
             showToast(error.message || "保存公告失败。", true);
         } finally {
             setBusy(form, false);
@@ -65,17 +57,16 @@ export function createAnnouncementEditor({ client, db, config, user, onChanged }
 
     async function remove() {
         const id = byId("announcement-id").value;
-        if (!id || !window.confirm("确定删除公告吗？")) return;
-        setBusy(form, true);
+        if (!id || !confirm("确定删除公告吗？")) return;
         try {
+            const imageUrl = byId("announcement-old-image-url").value;
             await db.announcements.remove(id);
+            if (imageUrl) await removeManagedImage(client, bucket, imageUrl, config.supabaseUrl).catch(() => {});
             dialog.close();
             await onChanged();
             showToast("公告已删除。");
         } catch (error) {
-            showToast(error.message || "删除公告失败。", true);
-        } finally {
-            setBusy(form, false);
+            showToast(error.message || "删除失败。", true);
         }
     }
 
