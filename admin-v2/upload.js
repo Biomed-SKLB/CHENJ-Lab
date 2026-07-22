@@ -9,3 +9,12 @@ export function validateImage(file) {
     }
     return true;
 }
+
+export async function uploadImage(client, userId, bucket, file, folder) {
+    validateImage(file);
+    if (!file) return null;
+    const path = `${userId}/${folder}-${Date.now()}-${file.name}`;
+    const { error } = await client.storage.from(bucket).upload(path, file);
+    if (error) throw error;
+    return client.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+}
