@@ -18,12 +18,20 @@ create table if not exists public.member_overrides (
     image_url text,
     category text check (category in ('Current Members', 'Former Members')),
     sort_order integer,
-    is_visible boolean not null default true,
+    -- NULL inherits the static member's visibility; added members write an
+    -- explicit boolean from Admin v2.
+    is_visible boolean default true,
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now(),
     constraint added_member_requires_name
         check (base_member_key is not null or name is not null)
 );
+
+-- Existing deployments created by an earlier version used NOT NULL here.
+-- Dropping the constraint enables true differential overrides without
+-- rewriting unchanged static-member visibility to `true`.
+alter table public.member_overrides
+    alter column is_visible drop not null;
 
 create table if not exists public.announcements (
     id uuid primary key default gen_random_uuid(),
