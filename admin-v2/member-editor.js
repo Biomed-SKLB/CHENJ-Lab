@@ -1,20 +1,6 @@
 import { byId, setBusy, showToast } from "./utils.js";
-import { memberKey, memberPayload } from "./members.js";
+import { hasMeaningfulMemberOverride, memberKey, memberPayload } from "./members.js";
 import { uploadImage, removeManagedImage } from "./upload.js";
-
-function hasMeaningfulOverride(payload) {
-    if (!payload.base_member_key) return true;
-    if (payload.is_visible === false) return true;
-    return [
-        payload.name,
-        payload.position,
-        payload.research,
-        payload.bio,
-        payload.image_url,
-        payload.category,
-        payload.sort_order
-    ].some((value) => value !== null);
-}
 
 export function createMemberEditor({ client, db, config, user, onChanged }) {
     const dialog = byId("member-dialog");
@@ -48,6 +34,7 @@ export function createMemberEditor({ client, db, config, user, onChanged }) {
         event.preventDefault();
         setBusy(form, true);
         let uploadedUrl = null;
+        let persisted = false;
         try {
             const oldImageUrl = byId("member-old-image-url").value;
             const file = byId("member-image-file").files[0];
@@ -73,11 +60,12 @@ export function createMemberEditor({ client, db, config, user, onChanged }) {
                 is_visible: byId("member-visible").checked
             }, currentMember?.baseline || null);
 
-            if (payload.base_member_key && !hasMeaningfulOverride(payload)) {
+            if (payload.base_member_key && !hasMeaningfulMemberOverride(payload)) {
                 if (payload.id) await db.members.remove(payload.id);
             } else {
                 await db.members.save(payload);
             }
+            persisted = true;
 
             if (oldImageUrl && oldImageUrl !== finalImageUrl) {
                 await removeManagedImage(client, bucket, oldImageUrl, config.supabaseUrl).catch(() => {});
@@ -87,7 +75,7 @@ export function createMemberEditor({ client, db, config, user, onChanged }) {
             await onChanged();
             showToast("成员信息已保存。");
         } catch (error) {
-            if (uploadedUrl) {
+            if (uploadedUrl && !persisted) {
                 await removeManagedImage(client, bucket, uploadedUrl, config.supabaseUrl).catch(() => {});
             }
             showToast(error.message || "保存成员失败。", true);
