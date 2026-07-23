@@ -27,6 +27,7 @@ export function createAnnouncementEditor({ client, db, config, user, onChanged }
         event.preventDefault();
         setBusy(form, true);
         let uploadedUrl = null;
+        let persisted = false;
         try {
             const oldImageUrl = byId("announcement-old-image-url").value;
             uploadedUrl = await uploadImage(client, user.id, bucket, byId("announcement-image-file").files[0], "announcement");
@@ -41,6 +42,7 @@ export function createAnnouncementEditor({ client, db, config, user, onChanged }
                 status: byId("announcement-status").value
             }, user.id);
             await db.announcements.save(payload);
+            persisted = true;
             if (oldImageUrl && oldImageUrl !== finalImageUrl) {
                 await removeManagedImage(client, bucket, oldImageUrl, config.supabaseUrl).catch(() => {});
             }
@@ -48,7 +50,9 @@ export function createAnnouncementEditor({ client, db, config, user, onChanged }
             await onChanged();
             showToast("公告已保存。");
         } catch (error) {
-            if (uploadedUrl) await removeManagedImage(client, bucket, uploadedUrl, config.supabaseUrl).catch(() => {});
+            if (uploadedUrl && !persisted) {
+                await removeManagedImage(client, bucket, uploadedUrl, config.supabaseUrl).catch(() => {});
+            }
             showToast(error.message || "保存公告失败。", true);
         } finally {
             setBusy(form, false);
@@ -58,6 +62,7 @@ export function createAnnouncementEditor({ client, db, config, user, onChanged }
     async function remove() {
         const id = byId("announcement-id").value;
         if (!id || !confirm("确定删除公告吗？")) return;
+        setBusy(form, true);
         try {
             const imageUrl = byId("announcement-old-image-url").value;
             await db.announcements.remove(id);
@@ -67,6 +72,8 @@ export function createAnnouncementEditor({ client, db, config, user, onChanged }
             showToast("公告已删除。");
         } catch (error) {
             showToast(error.message || "删除失败。", true);
+        } finally {
+            setBusy(form, false);
         }
     }
 
