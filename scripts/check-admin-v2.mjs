@@ -7,6 +7,10 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const adminDir = join(root, "admin-v2");
 const htmlPath = join(adminDir, "index.html");
 const html = readFileSync(htmlPath, "utf8");
+const membersHtml = readFileSync(join(root, "members.html"), "utf8");
+const newsHtml = readFileSync(join(root, "news.html"), "utf8");
+const siteContent = readFileSync(join(root, "site-content.js"), "utf8");
+const schema = readFileSync(join(root, "supabase", "schema.sql"), "utf8");
 
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
 assert.equal(new Set(ids).size, ids.length, "duplicate DOM ids found");
@@ -86,8 +90,28 @@ for (const match of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
 
 assert(html.includes('type="module" src="./app.js"'), "app.js must load as an ES module");
 assert(html.includes('name="robots" content="noindex, nofollow"'), "preview must remain noindex");
+for (const [pageName, pageHtml] of [["members.html", membersHtml], ["news.html", newsHtml]]) {
+    assert(pageHtml.includes('src="site-config.js"'), `${pageName} must load site-config.js`);
+    assert(pageHtml.includes('src="site-content.js"'), `${pageName} must load site-content.js`);
+}
+assert(siteContent.includes('.from("member_overrides")'), "public members must read member_overrides");
+assert(siteContent.includes('.from("announcements")'), "public news must read announcements");
+assert(siteContent.includes('.eq("status", "published")'), "public news must filter published announcements");
+assert(
+    siteContent.includes('.lte("published_at", new Date().toISOString())'),
+    "public news must exclude future announcements"
+);
+assert(
+    /is_visible boolean default true/.test(schema) &&
+    /alter column is_visible drop not null/.test(schema),
+    "member visibility must allow NULL to inherit the static baseline"
+);
 
-const { mergeMembers, memberPayload } = await import(pathToFileURL(join(adminDir, "members.js")));
+const {
+    hasMeaningfulMemberOverride,
+    mergeMembers,
+    memberPayload
+} = await import(pathToFileURL(join(adminDir, "members.js")));
 const baseline = [{
     base_member_key: "alice",
     name: "Alice",
@@ -117,9 +141,19 @@ const payload = memberPayload({
     sort_order: 0,
     is_visible: true
 }, merged[0].baseline);
-assert.equal(payload.name, null);
-assert.equal(payload.position, "PhD");
-assert.equal(payload.research, null);
+assert.deepEqual(payload, {
+    id: "1",
+    base_member_key: "alice",
+    name: null,
+    position: "PhD",
+    research: null,
+    bio: null,
+    image_url: null,
+    category: null,
+    sort_order: null,
+    is_visible: null
+});
+assert.equal(hasMeaningfulMemberOverride(payload), true);
 
 const restoredPayload = memberPayload({
     id: "1",
@@ -133,6 +167,81 @@ const restoredPayload = memberPayload({
     sort_order: 0,
     is_visible: true
 }, merged[0].baseline);
-assert.equal(restoredPayload.position, null);
+assert.deepEqual(restoredPayload, {
+    id: "1",
+    base_member_key: "alice",
+    name: null,
+    position: null,
+    research: null,
+    bio: null,
+    image_url: null,
+    category: null,
+    sort_order: null,
+    is_visible: null
+});
+assert.equal(
+    hasMeaningfulMemberOverride(restoredPayload),
+    false,
+    "restoring every baseline field must remove the override row"
+);
 
-console.log(`admin-v2 checks passed: ${jsFiles.length} modules, ${ids.length} DOM ids`);
+const hiddenPayload = memberPayload({
+    id: null,
+    base_member_key: "alice",
+    name: "Alice",
+    position: "Student",
+    research: "RNA",
+    bio: "Bio",
+    image_url: "a.png",
+    category: "Current Members",
+    sort_order: 0,
+    is_visible: false
+}, merged[0].baseline);
+assert.equal(hiddenPayload.is_visible, false);
+assert.equal(hasMeaningfulMemberOverride(hiddenPayload), true);
+
+const { removeManagedImage } = await import(pathToFileURL(join(adminDir, "upload.js")));
+const removedPaths = [];
+const storageClient = {
+    storage: {
+        from(bucket) {
+            assert.equal(bucket, "chenj-lab-media");
+            return {
+                async remove(paths) {
+                    removedPaths.push(...paths);
+                    return { error: null };
+                }
+            };
+        }
+    }
+};
+const projectUrl = "https://example.supabase.co";
+assert.equal(
+    await removeManagedImage(storageClient, "chenj-lab-media", "member.jpg", projectUrl),
+    false,
+    "repository-relative images must never be deleted from Storage"
+);
+assert.equal(
+    await removeManagedImage(
+        storageClient,
+        "chenj-lab-media",
+        "https://images.example.org/member.jpg",
+        projectUrl
+    ),
+    false,
+    "external images must never be deleted from Storage"
+);
+assert.equal(
+    await removeManagedImage(
+        storageClient,
+        "chenj-lab-media",
+        `${projectUrl}/storage/v1/object/public/chenj-lab-media/admin/member%20photo.png`,
+        projectUrl
+    ),
+    true
+);
+assert.deepEqual(removedPaths, ["admin/member photo.png"]);
+
+console.log(
+    `admin-v2 checks passed: ${jsFiles.length} modules, ${ids.length} DOM ids, public filters and managed-image boundaries`
+);
