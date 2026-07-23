@@ -9,16 +9,20 @@ This directory contains a modular, non-production foundation for the CHENJ-Lab c
 - administrator verification through `site_admins`
 - baseline member parsing from `members.html`
 - merge of baseline members with `member_overrides`
-- administrator view of announcements, including drafts
-- isolated database and upload service modules for later write workflows
+- member create, edit, visibility, ordering, restore, and delete workflows
+- announcement draft, publish, edit, and delete workflows
+- managed image upload, replacement, rollback, and deletion cleanup
+- differential baseline overrides, including nullable inherited visibility
 
 ## Safety boundaries
 
 - `admin.html` and `admin.js` are unchanged
-- the public website is unchanged
-- no database migration is included
+- no real Supabase data is required for the local mock acceptance suite
+- `supabase/schema.sql` allows `member_overrides.is_visible` to be `NULL`
+  so unchanged static-member visibility remains inherited
 - no production route points to this directory
-- write methods exist at the service layer but are not connected to UI controls yet
+- the preview remains `noindex, nofollow`
+- live Supabase administrator CRUD still requires separate manual acceptance
 
 ## Module responsibilities
 
@@ -30,6 +34,9 @@ This directory contains a modular, non-production foundation for the CHENJ-Lab c
 - `announcements.js`: announcement transformations
 - `utils.js`: DOM and feedback helpers
 
-## Next migration slice
+## RC validation boundary
 
-Add member and announcement editor dialogs to the v2 page, connect one write workflow at a time, and test against the existing Supabase project before considering replacement of the current administrator page.
+Local syntax, contract, HTTP smoke, and browser tests use a Supabase stub and
+must not be reported as live database validation. Do not replace the current
+administrator page, mark the PR ready, or merge until an authorized
+administrator completes the live Supabase checklist.
