@@ -105,6 +105,20 @@ export function memberPayload(values, baseline = null) {
         image_url: nullableOverride(current.image_url, baseline.image_url),
         category: current.category === baseline.category ? null : current.category,
         sort_order: current.sort_order === Number(baseline.sort_order || 0) ? null : current.sort_order,
-        is_visible: current.is_visible
+        is_visible: current.is_visible === Boolean(baseline.is_visible) ? null : current.is_visible
     };
+}
+
+export function hasMeaningfulMemberOverride(payload) {
+    if (!payload.base_member_key) return true;
+    return [
+        payload.name,
+        payload.position,
+        payload.research,
+        payload.bio,
+        payload.image_url,
+        payload.category,
+        payload.sort_order,
+        payload.is_visible
+    ].some((value) => value !== null);
 }
